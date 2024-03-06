@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 
 import { Editor } from '@monaco-editor/react'
 
-import { Select, MenuItem, Switch, TextField } from '@mui/material'
+import { Select, MenuItem, Switch, TextField, Button } from '@mui/material'
+
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+
+import './coding.css'
 
 export default function Coding() {
 
     const [languange, setLanguage] = useState("c")
 
-    const [dark, setDark] = useState(true)
+    // const [dark, setDark] = useState(true)
 
     return (
         <div>
@@ -25,33 +29,67 @@ export default function Coding() {
                         <MenuItem value="html">HTML</MenuItem>
                     </Select>
                 </div>
-                <div>
+
+                {/* <div>
                     <Switch
                         checked={dark}
                         onChange={(e) => setDark(e.target.checked)}
                     />
+                </div> */}
+
+                <div>
+                    <Button variant='contained' endIcon={<PlayArrowIcon />}> Run Code </Button>
                 </div>
             </div>
-            <div style={{ display: 'flex', backgroundColor: (dark) ? "#1E1E1E" : "", justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center' }}>
                 <div style={{ width: '50%' }}>
                     <Editor
                         height="90vh"
                         language={languange}
                         defaultValue="// some comment"
-                        theme={(dark) ? 'vs-dark' : null}
+                        theme={'vs-dark'}
                     // onMount={handleEditorDidMount}
                     />
                 </div>
                 <div style={{ color: 'white', width: '50%' }}>
-                    <div style={{ width: '100%' }}>
+                    <div style={{ width: '100%', marginTop: 10 }}>
                         <TextField
                             id="outlined-basic"
                             variant="outlined"
-                            placeholder='Add input here...'
+                            label='Input values'
+                            InputLabelProps={{ style: { color: 'white' } }}
                             sx={{
                                 input: {
-                                    color: 'white', height: '45vh', border: "solid 1px white", borderRadius: "15px",
-                                    // "&:hover": { border: "solid 1px white" }
+                                    color: 'white', height: '35vh', borderRadius: "15px",
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    border: 'solid 1px white'
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    border: 'solid 1px #1976D2'
+                                }
+                            }}
+                            fullWidth
+                        />
+                    </div>
+                    <div style={{ marginTop: 10 }}>
+                        <TextField
+                            id="outlined-basic"
+                            variant="outlined"
+                            label='Output'
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            InputLabelProps={{ style: { color: 'white' } }}
+                            sx={{
+                                input: {
+                                    color: 'white', height: '35vh', borderRadius: "15px",
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    border: 'solid 1px white'
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    border: 'solid 1px #1976D2'
                                 }
                             }}
                             fullWidth
@@ -59,6 +97,6 @@ export default function Coding() {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
