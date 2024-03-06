@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../providers/AuthProvider';
+import { login } from '../../utils/login';
 
 function Copyright(props) {
   return (
@@ -37,7 +38,7 @@ export default function SignInSide() {
   const user = useAuth()
 
   const submit = (data) => {
-    user.login(data.username, data.password).then((resp) => {
+    login(data.username, data.password).then((resp) => {
       if (data.remember) {
         localStorage.setItem('token', resp)
         sessionStorage.removeItem('token')
@@ -142,7 +143,7 @@ export default function SignInSide() {
                     </Link>
                   </Grid>
                   <Grid item>
-                    <Link href="/signup" variant="body2">
+                    <Link href="../signup" variant="body2">
                       Don't have an account? Sign Up
                     </Link>
                   </Grid>

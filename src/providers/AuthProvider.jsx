@@ -15,15 +15,6 @@ export default function AuthProvider({ children }) {
 
     const [token, setToken] = useState(lastToken)
 
-    const login = async (username, password) => {
-        const data = {
-            username: username,
-            password: password
-        }
-        const resp = await _http.post('/auth/login', JSON.stringify(data))
-        return resp.data.token
-    }
-
     const logout = () => {
         setToken(null)
         localStorage.removeItem('token')
@@ -33,7 +24,6 @@ export default function AuthProvider({ children }) {
     const value = {
         token,
         setToken,
-        login,
         logout
     }
 

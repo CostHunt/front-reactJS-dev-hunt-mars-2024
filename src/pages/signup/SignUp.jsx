@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
-
+// import { Link as RouterLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function Copyright(props) {
   return (
@@ -29,26 +29,26 @@ function Copyright(props) {
 }
 
 
-
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+  const { register, handleSubmit } = useForm();
+
+  const submit = (data) => {
+    data['username'] = data.prenom
+    data['matricule'] = 5120
+    data['image'] = '/bobo.png'
+    console.log(data)
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
-          item
-          xs={false}
+          // item
+          // xs={false}
           sm={3}
           md={4}
           sx={{
@@ -75,7 +75,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(submit)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -87,8 +87,9 @@ export default function SignUp() {
                   label="First Name"
                   autoFocus
                   InputProps={{
-                    style: { borderRadius: '30px', width : '100%', marginBottom:'2%' },
-                }}
+                    style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
+                  }}
+                  {...register('prenoms')}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -100,8 +101,9 @@ export default function SignUp() {
                   name="lastName"
                   autoComplete="family-name"
                   InputProps={{
-                    style: { borderRadius: '30px', width : '100%', marginBottom:'2%' },
-                }}
+                    style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
+                  }}
+                  {...register('nom')}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -113,8 +115,9 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                   InputProps={{
-                    style: { borderRadius: '30px', width : '100%', marginBottom:'2%' },
-                }}
+                    style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
+                  }}
+                  {...register('email')}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -127,8 +130,9 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                   InputProps={{
-                    style: { borderRadius: '30px', width : '100%', marginBottom:'5%' },
-                }}
+                    style: { borderRadius: '30px', width: '100%', marginBottom: '5%' },
+                  }}
+                  {...register('password')}
                 />
               </Grid>
               <Grid item xs={12} mb={2}>
@@ -148,7 +152,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link href="/signup" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
