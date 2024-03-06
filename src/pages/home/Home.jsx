@@ -1,12 +1,19 @@
-import React from 'react'
-import { useAuth } from '../../providers/AuthProvider'
-
-export default function Home() {
-    const user = useAuth()
-    return (
-        <div>
-            Test Home
-            <button onClick={user.logout}> logout </button>
-        </div>
-    )
+import Topbar from "../../components/topbar/topbar"
+import Sidebar from "../../components/sidebar/sidebar"
+import Rightbar from "../../components/rightbar/rightbar"
+import Feed from "../../components/feed/feed"
+import "./home.css"
+function home() {
+  return (
+   <>
+    <Topbar/>
+    <div className="homeContainer">
+        <Sidebar/>
+        <Feed/>
+        <Rightbar/>
+    </div>
+   </>
+  )
 }
+
+export default home
