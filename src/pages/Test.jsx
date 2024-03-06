@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../providers/AuthProvider'
-import { createNewPost, getAllPosts } from '../utils/post'
+import { createNewPost, getAllPosts, getPostsbyGroup } from '../utils/post'
 
 export default function Test() {
     const user = useAuth()
@@ -12,7 +12,6 @@ export default function Test() {
         // console.log("success")
         // }).catch(() => {
         // })
-
     }, [])
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import SignInSide from './pages/login/Login'
 import SignUp from './pages/signup/SignUp'
-import Home from './pages/home/home'
+import Home from './pages/home/Home'
 import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/coding/Coding.jsx'

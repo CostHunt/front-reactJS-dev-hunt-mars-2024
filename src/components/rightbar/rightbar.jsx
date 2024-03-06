@@ -13,34 +13,34 @@ function rightbar() {
         <h4 className="rightbarTitle">Canaux actifs</h4>
         <ul className="rightbarFriendList">
           <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer"> 
-               <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
+            <div className="rightbarProfileImgContainer">
+              <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
               <span className="rightbaronline"></span>
             </div>
             <span className="rightbarUsername">Club d'entraide</span>
           </li>
           <li className="rightbarFriend">
-              <div className="rightbarProfileImgContainer"> 
-                <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
-                <span className="rightbaronline"></span>
-              </div>
-              <span className="rightbarUsername">Club de Logiciel Libre et Linux</span>
-            </li>
+            <div className="rightbarProfileImgContainer">
+              <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
+              <span className="rightbaronline"></span>
+            </div>
+            <span className="rightbarUsername">Club de Logiciel Libre et Linux</span>
+          </li>
           <li className="rightbarFriend">
-              <div className="rightbarProfileImgContainer"> 
-                <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
-                <span className="rightbaronline"></span>
-              </div>
-              <span className="rightbarUsername">L3 GB Groupe 2</span>
-            </li>
+            <div className="rightbarProfileImgContainer">
+              <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
+              <span className="rightbaronline"></span>
+            </div>
+            <span className="rightbarUsername">L3 GB Groupe 2</span>
+          </li>
           <li className="rightbarFriend">
-              <div className="rightbarProfileImgContainer"> 
-                <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
-                <span className="rightbaronline"></span>
-              </div>
-              <span className="rightbarUsername">Club de danse</span>
-            </li>
-          </ul>
+            <div className="rightbarProfileImgContainer">
+              <img src="assets/pdp/costhuntLogo.png" alt="" className="rightbarProfileImg" />
+              <span className="rightbaronline"></span>
+            </div>
+            <span className="rightbarUsername">Club de danse</span>
+          </li>
+        </ul>
       </div>
     </div>
   )
