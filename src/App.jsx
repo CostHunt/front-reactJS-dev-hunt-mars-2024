@@ -4,6 +4,7 @@ import SignUp from './pages/signup/SignUp'
 import Home from './pages/home/Home'
 import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Coding from './pages/coding/Coding.jsx'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/" index element={<Home />} />
         </Route>
+
+        <Route path='/Coding' element={<Coding />} />
 
         {/* route de redirection si est login */}
         <Route element={<PrivateRouteReverse />}>
