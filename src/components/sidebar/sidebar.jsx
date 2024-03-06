@@ -13,26 +13,13 @@ function sidebar() {
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <li className="sidebarListItem">
-            <ArticleIcon className="sidebarIcon"/>
-            <span className="sdebarListItemText">Actualité</span>
+            {/* <ArticleIcon className="sidebarIcon"/>
+            <span className="sdebarListItemText">Actualité</span> */}
+            <Button className="sidaber_btnNav" textAlign="left" sx={{width:"100%",height:'50px'}} startIcon={<ArticleIcon/>}>Home</Button>
           </li>
-          <li className="sidebarListItem">
-            <CalendarMonthIcon className="sidebarIcon"/>
-            <span className="sdebarListItemText">Evènement</span>
+          <li>
+            <Button className="sidaber_btnNav" textAlign="left" sx={{width:"100%",height:'50px'}} startIcon={<ArticleIcon/>}>COMPETITION</Button>
           </li>
-          <li className="sidebarListItem">
-            <Diversity2Icon className="sidebarIcon"/>
-            <span className="sdebarListItemText">Cercle d'étude</span>
-          </li>
-          <li className="sidebarListItem">
-            <MessageIcon className="sidebarIcon"/>
-            <span className="sdebarListItemText">Canaux</span>
-          </li>
-          <li className="sidebarListItem">
-            <HistoryIcon className="sidebarIcon"/>
-            <span className="sdebarListItemText">Emploi du temps</span>
-          </li>
-          
         </ul>
 
         <Button variant="contained" color="secondary">

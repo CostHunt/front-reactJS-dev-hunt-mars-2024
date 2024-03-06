@@ -2,6 +2,7 @@
     flex:3.5;
     height: 600px;
     overflow-y: scroll;
+    display: none;
 }
 
 ::-webkit-scrollbar{
