@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 import { Editor } from '@monaco-editor/react'
 
@@ -8,6 +8,10 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import { _http } from '../../utils/http';
 
+import { getinitialC, getinitialJs } from './minimalCode';
+
+import { LoadingButton } from '@mui/lab';
+
 import './coding.css'
 
 export default function Coding() {
@@ -16,33 +20,57 @@ export default function Coding() {
 
     const [output, setOutput] = useState("")
 
-    const editorRef = useRef(null);
+    const [editorValue, setEditorValue] = useState(getinitialC())
 
-    function handleEditorDidMount(editor, monaco) {
-        editorRef.current = editor;
+    const [loading, setLoading] = useState(false)
+
+    const [execTime, setExecTime] = useState(null)
+
+    const handleEditorChange = (e) => {
+        setEditorValue(e);
     }
 
     function sendValue() {
-        const body = {
-            code: editorRef.current.getValue(),
-            language: language
+        let currentLanguage = 'c'
+        if (language == "javascript") {
+            currentLanguage = 'js'
+        }
 
+        const dateDeb = new Date();
+
+        setLoading(true)
+
+        const body = {
+            code: editorValue,
+            language: currentLanguage
         }
         _http.post('/project/run/code/', body, {
             headers: {
                 'X-access-token': "xxx"
             },
         }).then((resp) => {
-            if (resp.data.res.error != "") {
-                console.log(resp.data.res)
+            // console.log(resp)
+            if (resp.data.res.error == "") {
                 setOutput(resp.data.res.output)
             } else {
                 setOutput(resp.data.res.error)
             }
-        }).catch((e) => {
-            console.log(e)
+            setLoading(false)
+            setExecTime(new Date() - dateDeb)
+        }).catch(() => {
+            console.log("erreur du compilateur")
+            setLoading(false)
         })
 
+    }
+
+    const handleLanguage = (e) => {
+        setLanguage(e.target.value)
+        setOutput("")
+        // console.log(e.target.value)
+        if (e.target.value == 'c') setEditorValue(getinitialC())
+        else if (e.target.value == 'javascript') setEditorValue(getinitialJs())
+        else setEditorValue("")
     }
 
     // const [dark, setDark] = useState(true)
@@ -53,7 +81,7 @@ export default function Coding() {
                 <div>
                     <Select
                         value={language}
-                        onChange={(e) => setLanguage(e.target.value)}
+                        onChange={handleLanguage}
                         sx={{ width: '125px' }}
                     >
                         <MenuItem value="javascript">Javascript</MenuItem>
@@ -63,15 +91,15 @@ export default function Coding() {
                     </Select>
                 </div>
 
-                {/* <div>
-                    <Switch
-                        checked={dark}
-                        onChange={(e) => setDark(e.target.checked)}
-                    />
-                </div> */}
-
                 <div>
-                    <Button variant='contained' onClick={sendValue} endIcon={<PlayArrowIcon />}> Run Code </Button>
+                    <LoadingButton
+                        loading={loading}
+                        loadingPosition="end"
+                        variant="contained"
+                        onClick={sendValue} endIcon={<PlayArrowIcon />}
+                    >
+                        Run Code
+                    </LoadingButton>
                 </div>
             </div>
             <div style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center' }}>
@@ -79,9 +107,9 @@ export default function Coding() {
                     <Editor
                         height="90vh"
                         language={language}
-                        defaultValue="// some comment"
+                        value={editorValue}
+                        onChange={handleEditorChange}
                         theme={'vs-dark'}
-                        onMount={handleEditorDidMount}
                     />
                 </div>
                 <div style={{ color: 'white', width: '50%' }}>
@@ -99,7 +127,7 @@ export default function Coding() {
                                     border: 'solid 1px white'
                                 },
                                 '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    border: 'solid 1px #1976D2'
+                                    border: 'solid 1px white'
                                 }
                             }}
                             fullWidth
@@ -123,11 +151,12 @@ export default function Coding() {
                                     border: 'solid 1px white'
                                 },
                                 '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    border: 'solid 1px #1976D2'
+                                    border: 'solid 1px white'
                                 }
                             }}
                             fullWidth
                         />
+                        {execTime / 1000} s
                     </div>
                 </div>
             </div>
