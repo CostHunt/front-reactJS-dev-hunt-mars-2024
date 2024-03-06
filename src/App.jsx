@@ -5,6 +5,7 @@ import Home from './pages/home/home'
 import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/coding/Coding.jsx'
+import Test from './pages/Test.jsx'
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" index element={<Home />} />
         </Route>
 
-        <Route path='/Coding' element={<Coding />} />
+        <Route path='/Coding' element={<Test />} />
 
         {/* route de redirection si est login */}
         <Route element={<PrivateRouteReverse />}>
