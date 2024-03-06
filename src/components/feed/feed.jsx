@@ -31,18 +31,10 @@ function Feed() {
   return (
     <div className="feed">
       <div className="feedWrapper">
-<<<<<<< HEAD
- 
-        <Share/>
-        {Posts.map((p,i)=>(
-          <Post key={i} post={p}/>
-        ))}
-=======
         <Share setPosts={setPosts} />
         {(posts) ? posts.map((p, i) => (
           <Post key={i} post={p} />
         )) : null}
->>>>>>> 6aef658cab3917af16bff9da303237095eda4036
       </div>
     </div>
   )
