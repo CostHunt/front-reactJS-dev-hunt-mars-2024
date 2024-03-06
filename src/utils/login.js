@@ -6,5 +6,5 @@ export const login = async (username, password) => {
         password: password
     }
     const resp = await _http.post('/auth/login', JSON.stringify(data))
-    return resp.data.token
+    return resp.data
 }
