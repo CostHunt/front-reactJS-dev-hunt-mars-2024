@@ -1,0 +1,31 @@
+.sidebarList{
+    width: 100%;
+    height:  100%;
+}
+
+.sidebarList .row{
+    background: rgb(51, 156, 204);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+}
+
+.row #icon{
+    font-size: 200px !important;
+    flex: 30%;
+    display: grid;
+    place-items: center;
+}
+
+.row #title{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    flex: 70%;
+    margin: auto;
+}
+
+.sidebarList .row:hover{
+    cursor: pointer;background: #3373af;
+}

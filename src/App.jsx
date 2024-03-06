@@ -5,7 +5,7 @@ import Home from './pages/home/Home'
 import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/coding/Coding.jsx'
-import Test from './pages/Test.jsx'
+import Groupe from './components/groupe/groupe.jsx'
 
 function App() {
 
@@ -15,7 +15,9 @@ function App() {
         {/* route avec login */}
         <Route element={<PrivateRoute />}>
           <Route path="/" index element={<Home />} />
-          <Route />
+          <Route path="/home" element={<Home />} />
+          <Route path='/Coding' element={<Coding />} />
+          <Route path='/groupe' element={<Groupe />} />
         </Route>
 
         <Route path='/Coding' element={<Coding />} />
@@ -23,7 +25,6 @@ function App() {
         {/* route de redirection si est login */}
         <Route element={<PrivateRouteReverse />}>
           <Route path="/login" element={<SignInSide />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
       </Routes>
