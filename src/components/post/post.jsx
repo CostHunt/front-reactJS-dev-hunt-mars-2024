@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../providers/AuthProvider";
 
 import { getUser } from "../../utils/account";
+import { likePost } from "../../utils/post";
 
 
 const { palette } = createTheme();
@@ -59,8 +60,12 @@ function Post({ post }) {
         if ((postDate / 60000 / 60) > 24) return Math.floor(postDate / 60000 / 60) + "j"
     }
 
+    const { token, user } = useAuth()
 
     const clickLike = () => {
+        likePost(token, user.id, post.id).then((resp) => {
+            console.log('liked successfully')
+        })
         setLikeClicked(!likeClicked);
     }
     const clickComment = () => {
