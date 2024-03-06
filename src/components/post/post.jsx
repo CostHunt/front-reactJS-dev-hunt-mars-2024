@@ -26,6 +26,7 @@ import { useAuth } from "../../providers/AuthProvider";
 
 import { getUser } from "../../utils/account";
 import { likePost } from "../../utils/post";
+import { getComment } from "../../utils/comment";
 
 
 const { palette } = createTheme();
@@ -50,7 +51,7 @@ function Post({ post }) {
 
     const [ResponseLikeClicked, setResponseLikeClicked] = useState(false);
 
-    const [userPost, setUserPost] = useState(null)
+    const [comments, setComments] = useState([])
 
     const getDate = () => {
         const postDate = new Date() - new Date(post.date_publication)
@@ -64,11 +65,20 @@ function Post({ post }) {
 
     const clickLike = () => {
         likePost(token, user.id, post.id).then((resp) => {
-            console.log('liked successfully')
+            console.log('success')
         })
         setLikeClicked(!likeClicked);
     }
     const clickComment = () => {
+        getComment(token, post.id).then((resp) => {
+            if (resp?.message) {
+                setComments(resp)
+            } else {
+                setComments([])
+            }
+
+            // console.log(resp)
+        })
         setCommentClicked(!commentClicked);
     }
     const clickAdvice = () => {
@@ -80,9 +90,9 @@ function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={(userPost?.image_profile != null) ? userPost.image_profile : '/assets/pdp/no-picture.webp'} alt="" className="postProfileImg" />
-                        <span className="postUsername">{userPost?.username}</span>
-                        <span className="postDate">{getDate()}</span>
+                        <img src={(post?.account?.image_profile != null) ? post?.account?.image_profile : '/assets/pdp/no-picture.webp'} alt="XXX" className="postProfileImg" />
+                        <span className="postUsername">{post?.account?.username}</span>
+                        <span className="postDate">Il y a {getDate()}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVertIcon />
@@ -91,15 +101,15 @@ function Post({ post }) {
                 <div className="postCenter">
                     <span className="postText">{post?.description}</span><br />
                     <div className="postImages">
-                        <img src={post?.image} alt="" className="postImg" />
+                        <img src={post?.attachedfiles?.url} alt="" className="postImg" />
                     </div>
                 </div>
                 <ThemeProvider theme={theme}>
                     <div className="postBottom">
                         <span className="postLikeCounteur">
-                            {likeClicked && <>Vous et</>} 33 autres personnes
+                            {likeClicked && <>Vous et</>} {post.likesCount} autres personnes
                         </span>
-                        <div className="postCommentText"><ChatFilledcon sx={{ width: "18px", bottom: "0" }} />9</div>
+                        <div className="postCommentText"><ChatFilledcon sx={{ width: "18px", bottom: "0" }} />{post.commentsCount}</div>
                     </div>
                     <div className="postBottom" style={bottomBtnGroup}>
                         {!likeClicked ? (
@@ -114,9 +124,8 @@ function Post({ post }) {
                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button>
                     </div>
                 </ThemeProvider>
-                {commentClicked &&
+                {/* {commentClicked &&
                     <div className="commentsWrapper">
-                        {/* debut boucle */}
                         <div className="oneComment">
                             <div className="oneComment_content">
                                 <img src="public/assets/pdp/bobo.jpg" alt="" className="postProfileImg commentProfilepic" />
@@ -131,25 +140,25 @@ function Post({ post }) {
                             <div className="oneComment_advice">
                                 {!ResponseLikeClicked ? (
                                     <>
-                                        {/* boutton pas cliqué */}
-                                        <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" />
-                                        <span color="warning">42</span>
-                                    </>
-                                ) : (<>
-                                    {/* boutton cliqué */}
-                                    <ThumbUpIcon color="anger" onClick={clickAdvice} />
-                                    <span color="warning">43</span>
-                                </>
+                                        boutton pas cliqué 
+                <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" />
+                <span color="warning">42</span>
+            </>
+            ) : (<>
+                boutton cliqué 
+                <ThumbUpIcon color="anger" onClick={clickAdvice} />
+                <span color="warning">43</span>
+            </>
                                 )}
 
-                            </div>
-                        </div>
-                        {/* fin boucle */}
-                    </div>
-                }
-
-            </div>
         </div>
+                        </div >
+         fin boucle
+                    </div >
+                } */}
+
+            </div >
+        </div >
 
     )
 }

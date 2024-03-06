@@ -15,9 +15,10 @@ function App() {
         {/* route avec login */}
         <Route element={<PrivateRoute />}>
           <Route path="/" index element={<Home />} />
+          <Route />
         </Route>
 
-        <Route path='/Coding' element={<Test />} />
+        <Route path='/Coding' element={<Coding />} />
 
         {/* route de redirection si est login */}
         <Route element={<PrivateRouteReverse />}>
