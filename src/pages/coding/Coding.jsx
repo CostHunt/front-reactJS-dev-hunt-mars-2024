@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { Editor } from '@monaco-editor/react'
 
@@ -6,11 +6,44 @@ import { Select, MenuItem, Switch, TextField, Button } from '@mui/material'
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
+import { _http } from '../../utils/http';
+
 import './coding.css'
 
 export default function Coding() {
 
-    const [languange, setLanguage] = useState("c")
+    const [language, setLanguage] = useState("c")
+
+    const [output, setOutput] = useState("")
+
+    const editorRef = useRef(null);
+
+    function handleEditorDidMount(editor, monaco) {
+        editorRef.current = editor;
+    }
+
+    function sendValue() {
+        const body = {
+            code: editorRef.current.getValue(),
+            language: language
+
+        }
+        _http.post('/project/run/code/', body, {
+            headers: {
+                'X-access-token': "xxx"
+            },
+        }).then((resp) => {
+            if (resp.data.res.error != "") {
+                console.log(resp.data.res)
+                setOutput(resp.data.res.output)
+            } else {
+                setOutput(resp.data.res.error)
+            }
+        }).catch((e) => {
+            console.log(e)
+        })
+
+    }
 
     // const [dark, setDark] = useState(true)
 
@@ -19,7 +52,7 @@ export default function Coding() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                     <Select
-                        value={languange}
+                        value={language}
                         onChange={(e) => setLanguage(e.target.value)}
                         sx={{ width: '125px' }}
                     >
@@ -38,17 +71,17 @@ export default function Coding() {
                 </div> */}
 
                 <div>
-                    <Button variant='contained' endIcon={<PlayArrowIcon />}> Run Code </Button>
+                    <Button variant='contained' onClick={sendValue} endIcon={<PlayArrowIcon />}> Run Code </Button>
                 </div>
             </div>
             <div style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center' }}>
                 <div style={{ width: '50%' }}>
                     <Editor
                         height="90vh"
-                        language={languange}
+                        language={language}
                         defaultValue="// some comment"
                         theme={'vs-dark'}
-                    // onMount={handleEditorDidMount}
+                        onMount={handleEditorDidMount}
                     />
                 </div>
                 <div style={{ color: 'white', width: '50%' }}>
@@ -80,6 +113,7 @@ export default function Coding() {
                             InputProps={{
                                 readOnly: true,
                             }}
+                            value={output}
                             InputLabelProps={{ style: { color: 'white' } }}
                             sx={{
                                 input: {
