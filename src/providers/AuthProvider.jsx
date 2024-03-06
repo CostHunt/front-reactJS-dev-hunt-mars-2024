@@ -13,15 +13,16 @@ export default function AuthProvider({ children }) {
         localStorage.token :
         (sessionStorage.token != null) ? sessionStorage.token : null
 
-    const lastUser = (localStorage.account != null) ?
-        localStorage.account :
-        (sessionStorage.account != null) ? sessionStorage.account : null
+    const lastUser = (localStorage.user != null) ?
+        localStorage.user :
+        (sessionStorage.user != null) ? sessionStorage.user : null
 
     const [token, setToken] = useState(lastToken)
-    const [user, setUser] = useState(lastUser)
+    const [user, setUser] = (lastUser != null) ? useState(JSON.parse(lastUser)) : useState(null)
 
     const logout = () => {
         setToken(null)
+        setUser(null)
         localStorage.clear()
         sessionStorage.clear()
     }

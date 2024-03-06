@@ -41,14 +41,15 @@ export default function SignInSide() {
     login(data.username, data.password).then((resp) => {
       if (data.remember) {
         localStorage.setItem('token', resp.token)
-        localStorage.setItem('user', resp.account)
+        localStorage.setItem('user', JSON.stringify(resp.account))
         sessionStorage.clear()
       } else {
         sessionStorage.setItem('token', resp.token)
-        sessionStorage.setItem('token', resp.account)
+        sessionStorage.setItem('user', JSON.stringify(resp.account))
         localStorage.clear()
       }
-      user.setToken(resp)
+      user.setToken(resp.token)
+      user.setUser(resp.account)
     }).catch((error) => {
       console.log(error)
     })
