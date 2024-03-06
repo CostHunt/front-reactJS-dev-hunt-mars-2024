@@ -13,6 +13,7 @@ import { getinitialC, getinitialJs } from './minimalCode';
 import { LoadingButton } from '@mui/lab';
 
 import './coding.css'
+import { useAuth } from '../../providers/AuthProvider';
 
 export default function Coding() {
 
@@ -44,9 +45,10 @@ export default function Coding() {
             code: editorValue,
             language: currentLanguage
         }
+        const user = useAuth()
         _http.post('/project/run/code/', body, {
             headers: {
-                'X-access-token': "xxx"
+                'X-access-token': user.token
             },
         }).then((resp) => {
             // console.log(resp)

@@ -40,14 +40,16 @@ export default function SignInSide() {
   const submit = (data) => {
     login(data.username, data.password).then((resp) => {
       if (data.remember) {
-        localStorage.setItem('token', resp)
-        sessionStorage.removeItem('token')
+        localStorage.setItem('token', resp.token)
+        localStorage.setItem('user', JSON.stringify(resp.account))
+        sessionStorage.clear()
       } else {
-        sessionStorage.setItem('token', resp)
-        localStorage.removeItem('token')
+        sessionStorage.setItem('token', resp.token)
+        sessionStorage.setItem('user', JSON.stringify(resp.account))
+        localStorage.clear()
       }
-      user.setToken(resp)
-      console.log("log")
+      user.setToken(resp.token)
+      user.setUser(resp.account)
     }).catch((error) => {
       console.log(error)
     })
