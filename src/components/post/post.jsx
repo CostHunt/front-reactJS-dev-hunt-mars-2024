@@ -62,7 +62,7 @@ const theme = createTheme({
 
 function post({ post }) {
 
-    const [likeClicked, setLikeClicked] = useState(false);
+    const [likeClicked, setLikeClicked] = useState(post.isLiked);
 
     const [ResponseLikeClicked, setResponseLikeClicked] = useState(false);
 
@@ -133,7 +133,7 @@ function post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={(post?.account?.image_profile != null) ? post?.account?.image_profile : '/assets/pdp/no-picture.webp'} alt="XXX" className="postProfileImg" />
+                        <img src='/assets/pdp/no-picture.webp' alt="XXX" className="postProfileImg" />
                         <span className="postUsername">{post?.account?.username}</span>
                         <span className="postDate">{getDate()}</span>
                     </div>
@@ -153,7 +153,7 @@ function post({ post }) {
                 <ThemeProvider theme={theme}>
                     <div className="postBottom">
                         <span className="postLikeCounteur">
-                            {likeClicked && <>Vous et</>} {post.likesCount} autres personnes
+                            {(likeClicked) ? post.likesCount + 1 : post.likesCount} likes
                         </span>
                         <div className="postCommentText"><ChatFilledcon sx={{ width: "18px", bottom: "0" }} />{post.commentsCount}</div>
                     </div>
@@ -187,7 +187,7 @@ function post({ post }) {
                             <div className="postWrapper">
                                 <div className="postTop">
                                     <div className="postTopLeft">
-                                        <img src={(post?.account?.image_profile != null) ? post?.account?.image_profile : '/assets/pdp/no-picture.webp'} alt="XXX" className="postProfileImg" />
+                                        <img src='/assets/pdp/no-picture.webp' alt="XXX" className="postProfileImg" />
                                         <span className="postUsername">{post?.account?.username}</span>
                                         <span className="postDate">{getDate()}</span>
                                     </div>
@@ -264,7 +264,7 @@ function post({ post }) {
                     </Box>
                 </Modal>
             </div >
-        </div>
+        </div >
     )
 }
 

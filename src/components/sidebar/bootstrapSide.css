@@ -58,7 +58,7 @@
     /* position: absolute; */
     left: 1vw;
     top: 1vw;
-    height: 95vh;
+    height: 100vh;
     background: var(--navbar-dark-primary);
     border-radius: 5px;
     display: flex;

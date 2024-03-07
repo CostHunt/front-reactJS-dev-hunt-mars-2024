@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
+import './workspace.css'
+
 
 export default function OneDoc({ id, title, description, categorie, code }) {
 
@@ -19,6 +21,7 @@ export default function OneDoc({ id, title, description, categorie, code }) {
       <CardMedia
         sx={{ height: 140 }}
         image={image}
+        className='onecard'
         title="green iguana"
       />
       <CardContent>

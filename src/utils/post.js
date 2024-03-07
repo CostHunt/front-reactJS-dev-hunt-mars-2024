@@ -34,7 +34,7 @@ export async function getPostsbyGroup(token, idGroupe){
 }
 
 export async function likePost(token, userid, postid){ 
-    const resp = await _http.put(`/post/${userid}/like/${postid}/`, {
+    const resp = await _http.put(`/post/${userid}/like/${postid}/`, {}, {
         headers: {
             'X-access-token': token
         }

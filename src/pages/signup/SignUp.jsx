@@ -152,9 +152,9 @@ export default function SignUp() {
                   {...register('password', { required: "Recipe name is required" })}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <input type="file" accept='image/*' {...register('image')} />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"

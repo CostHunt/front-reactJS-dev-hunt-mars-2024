@@ -53,6 +53,9 @@ export default function Coding() {
     const [execTime, setExecTime] = useState(null)
 
     const [open, setOpen] = React.useState(false);
+
+    const [input, setInput] = useState(null)
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -94,7 +97,8 @@ export default function Coding() {
 
         const body = {
             code: editorValue,
-            language: currentLanguage
+            language: currentLanguage,
+            input: input
         }
         _http.post('/run/code/', body, {
             headers: {
@@ -231,6 +235,8 @@ export default function Coding() {
                                         }
                                     }}
                                     fullWidth
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
                                 />
                             </div>
                             <div style={{ marginTop: '5%', }}>

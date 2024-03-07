@@ -11,6 +11,8 @@ import OneDoc from './oneDoc';
 import { getAllDocs } from '../../utils/workspace';
 import { useAuth } from '../../providers/AuthProvider';
 
+import './workspace.css'
+
 
 function Workspace() {
 
