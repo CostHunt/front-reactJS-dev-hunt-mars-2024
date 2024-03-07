@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Editor } from '@monaco-editor/react'
 import { Modal, Select, MenuItem, Switch, TextField, Button, Box } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -12,6 +12,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { createDocs, updateDocs } from '../../utils/workspace';
 import { useAuth } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
+import { useAnimation } from 'framer-motion';
 
 
 const style = {
@@ -38,29 +39,29 @@ function getinitialJs() {
 
 const WaveIcon = ({ src, alt, delay }) => {
     const controls = useAnimation();
-  
+
     useEffect(() => {
-      controls.start({
-        x: [0, 0, 0, 0, 0], 
-        scale: [1, 1.4, 1, 1, 1],
-        transition: {
-          duration: 3, 
-          ease: "linear",
-          repeat: Infinity,
-          delay,
-        },
-      });
+        controls.start({
+            x: [0, 0, 0, 0, 0],
+            scale: [1, 1.4, 1, 1, 1],
+            transition: {
+                duration: 3,
+                ease: "linear",
+                repeat: Infinity,
+                delay,
+            },
+        });
     }, [controls, delay]);
-  
+
     return (
-      <motion.img
-        style={{ width: "3%", marginRight: '10%' }}
-        src={src}
-        alt={alt}
-        animate={controls}
-      />
+        <motion.img
+            style={{ width: "3%", marginRight: '10%' }}
+            src={src}
+            alt={alt}
+            animate={controls}
+        />
     );
-  };
+};
 
 export default function Coding() {
 
@@ -207,9 +208,9 @@ export default function Coding() {
                                 <MenuItem value="html" disabled>HTML</MenuItem>
                             </Select>
                         </motion.div>
-                        
+
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            <WaveIcon 
+                            <WaveIcon
                                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg"
                                 alt="Bash Icon"
                                 delay={0}
@@ -230,7 +231,7 @@ export default function Coding() {
                                 delay={1.5}
                             />
                         </div>
-                        
+
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.8 }}
