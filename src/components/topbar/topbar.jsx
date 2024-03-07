@@ -14,30 +14,31 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 
+
 function topbar() {
 
+    
+    
     const navigate = useNavigate();
-
     const { logout } = useAuth()
-
     return (
         <div>
             <div className="topbarContainer">
-                <div className="topbarLeft">
-                    <span className="logo">ENI-sociaux</span>
-                </div>
+                {/* <div className="topbarLeft">
+                    <span className="logo">ENI.socialize</span>
+                </div> */}
                 <div className="topbarCenter">
                     <div className="searchbar">
                         <SearchIcon className="searchIcon" />
-                        <input type="text" placeholder="search..." className="searchInput" />
+                        <input type="text" placeholder="Rechercher une information..." className="searchInput" />
                     </div>
                 </div>
-                <div className="topbarRight">
-                    <div className="topbarLink">
+                <div className="">
+                    {/* <div className="topbarLink">
                         <span className="topbarLink">Homepage</span>
                         <span className="topbarLink">Timeline</span>
-                    </div>
-                    <div className="topbarIcons">
+                    </div> */}
+                    {/* <div className="topbarIcons">
                         <div className="topbarIconItem">
                             <Badge badgeContent={4} color="success">
                                 <PersonIcon />
@@ -53,12 +54,12 @@ function topbar() {
                                 <NotificationsIcon />
                             </Badge>
                         </div>
-                    </div>
-                    <div className="topbarIconItem">
+                    </div> */}
+                    {/* <div className="topbarIconItem">
                         <IconButton onClick={logout}>
                             <LogoutIcon sx={{ color: 'white' }} />
                         </IconButton>
-                    </div>
+                    </div> */}
                     <PopupState variant="popover" popupId="demo-popup-popover">
                     {(popupState) => (
                         <div>
@@ -76,7 +77,7 @@ function topbar() {
                         >
                             <div className="account-popover">
                                 <Typography className="account-popover-element"  sx={{ p: 2 }} onClick={()=>{navigate('/workspace')}}>Mes dossiers de travail</Typography>
-                                <Typography className="account-popover-element"  sx={{ p: 2 }}>N'importe quoi</Typography>
+                                <Typography className="account-popover-element"  sx={{ p: 2,color:'red' }} onClick={logout}><LogoutIcon /> Se déconnecter</Typography>
                             </div>
                         </Popover>
                         </div>

@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OneDoc from './oneDoc';
 
-impo
+
 
 function Workspace() {
   const Group=()=>{

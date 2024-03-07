@@ -6,10 +6,12 @@ import Rightbar from './components/rightbar/rightbar'
 export default function Layout({ Children }) {
   return (
        <>
-            <Topbar/>
             <div className="homeContainer">
                 <Sidebar/>
-                    {Children}
+                    <div className="home_main">
+                        <Topbar/>
+                        {Children}
+                    </div>
                 <Rightbar/>
             </div>
         </>  
