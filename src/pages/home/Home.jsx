@@ -1,24 +1,24 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import "./home.css"
 
-import Layout from "../../Layout" 
+import Layout from "../../Layout"
 
 
 import Topbar from "../../components/topbar/topbar"
 import Sidebar from "../../components/sidebar/sidebar"
 import Rightbar from "../../components/rightbar/rightbar"
-import Feed from "../../components/feed/feed"
+import Feed from "../../components/feed/Feed"
 import Groupe from "../../components/groupe/groupe"
 
 function home() {
-  const location = useLocation();
+    const location = useLocation();
 
-  
-  return (
-    <Layout Children={<Feed/>}/>
-      
-  )
+
+    return (
+        <Layout Children={<Feed />} />
+
+    )
 }
 
 export default home

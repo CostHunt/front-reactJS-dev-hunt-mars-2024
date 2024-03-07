@@ -8,7 +8,8 @@ import { Stack } from "@mui/material";
 
 
 // material import
-import { Button, ButtonGroup, Box } from "@mui/material";
+import { Button, ButtonGroup, Box, TextField, IconButton } from "@mui/material";
+import Modal from '@mui/material/Modal';
 // icons
 import MarkChatReadRoundedIcon from '@mui/icons-material/MarkChatReadRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
@@ -20,14 +21,28 @@ import PanToolIcon from '@mui/icons-material/PanTool';
 import ChatFilledcon from '@mui/icons-material/ChatOutlined';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined'; //like outline
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';//like filled
+import SendIcon from '@mui/icons-material/Send';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { useEffect, useState } from "react";
 import { useAuth } from "../../providers/AuthProvider";
 
 import { getUser } from "../../utils/account";
 import { likePost } from "../../utils/post";
-import { getComment } from "../../utils/comment";
+import { comment, getComment } from "../../utils/comment";
 
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '50%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -47,39 +62,54 @@ const theme = createTheme({
 function Post({ post }) {
 
     const [likeClicked, setLikeClicked] = useState(false);
-    const [commentClicked, setCommentClicked] = useState(false);
 
     const [ResponseLikeClicked, setResponseLikeClicked] = useState(false);
 
     const [comments, setComments] = useState([])
 
+    const [commentVal, setCommentVal] = useState('')
+
+    const [open, setOpen] = useState(false);
+    const handleClose = () => setOpen(false);
+
     const getDate = () => {
         const postDate = new Date() - new Date(post.date_publication)
-        if ((postDate / 60000) < 10) return "A l'instant"
-        if ((postDate / 60000) < 60) return Math.floor(postDate / 60000) + "min"
-        if ((postDate / 60000) > 60) return Math.floor(postDate / 60000 / 60) + "h"
-        if ((postDate / 60000 / 60) > 24) return Math.floor(postDate / 60000 / 60) + "j"
+        if ((postDate / 60000) < 5) return "A l'instant"
+        if ((postDate / 60000) < 60) return "Il y a " + Math.floor(postDate / 60000) + "min"
+        if ((postDate / 60000) > 60) return "Il y a " + Math.floor(postDate / 60000 / 60) + "h"
+        if ((postDate / 60000 / 60) > 24) return "Il y a " + Math.floor(postDate / 60000 / 60) + "j"
     }
 
     const { token, user } = useAuth()
+    const isMyPost = post.id_account == user.id
+
+    const handleComment = () => {
+        comment(user.token, user.id, post.id, commentVal).then((resp) => {
+            setComments((c) => [...c, resp])
+        })
+    }
+
+    const handleResolve = () => {
+
+    }
 
     const clickLike = () => {
         likePost(token, user.id, post.id).then((resp) => {
-            console.log('success')
+            console.log(resp)
         })
         setLikeClicked(!likeClicked);
     }
     const clickComment = () => {
+
         getComment(token, post.id).then((resp) => {
+            setOpen(true);
             if (resp?.message) {
-                setComments(resp)
-            } else {
                 setComments([])
+            } else {
+                setComments(resp)
             }
 
-            // console.log(resp)
         })
-        setCommentClicked(!commentClicked);
     }
     const clickAdvice = () => {
         setResponseLikeClicked(!ResponseLikeClicked);
@@ -92,11 +122,12 @@ function Post({ post }) {
                     <div className="postTopLeft">
                         <img src={(post?.account?.image_profile != null) ? post?.account?.image_profile : '/assets/pdp/no-picture.webp'} alt="XXX" className="postProfileImg" />
                         <span className="postUsername">{post?.account?.username}</span>
-                        <span className="postDate">Il y a {getDate()}</span>
+                        <span className="postDate">{getDate()}</span>
                     </div>
-                    <div className="postTopRight">
-                        <MoreVertIcon />
-                    </div>
+                    {isMyPost ?
+                        <div className="postTopRight">
+                            <MoreVertIcon />
+                        </div> : null}
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.description}</span><br />
@@ -121,45 +152,104 @@ function Post({ post }) {
                         )
                         }
                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
-                        <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button>
+                        {(isMyPost) ? <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
                     </div>
                 </ThemeProvider>
-                {/* {commentClicked &&
-                    <div className="commentsWrapper">
-                        <div className="oneComment">
-                            <div className="oneComment_content">
-                                <img src="public/assets/pdp/bobo.jpg" alt="" className="postProfileImg commentProfilepic" />
-                                <div className="eachContentComment">
-                                    <span className="comment_username" >Bobo</span>
-                                    <span className="comment_content" >
-                                        Fa firy taona zany maître ty no nanomboka nilona tanaty musique e? Hainao daholo v ranga le 😭,mampitsiriritra mitsy
-                                    </span>
 
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+
+                >
+                    <Box sx={{
+                        ...style, "@media (max-width: 992px)": {
+                            width: "100%"
+                        }
+                    }}>
+                        <div className="post">
+                            <div className="postWrapper">
+                                <div className="postTop">
+                                    <div className="postTopLeft">
+                                        <img src={(post?.account?.image_profile != null) ? post?.account?.image_profile : '/assets/pdp/no-picture.webp'} alt="XXX" className="postProfileImg" />
+                                        <span className="postUsername">{post?.account?.username}</span>
+                                        <span className="postDate">{getDate()}</span>
+                                    </div>
+                                    <div className="postTopRight">
+                                        <IconButton onClick={handleClose}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
+                                </div>
+                                <div className="postCenter">
+                                    <span className="postText">{post?.description}</span><br />
+                                    <div className="postImages">
+                                        <img src={post?.attachedfiles?.url} alt="" className="postImg" />
+                                    </div>
+                                </div>
+                                <ThemeProvider theme={theme}>
+                                    <div className="postBottom">
+                                        <span className="postLikeCounteur">
+                                            {likeClicked && <>Vous et</>} {post.likesCount} autres personnes
+                                        </span>
+                                        <div className="postCommentText"><ChatFilledcon sx={{ width: "18px", bottom: "0" }} />{post.commentsCount}</div>
+                                    </div>
+                                    <div className="postBottom" style={bottomBtnGroup}>
+                                        {!likeClicked ? (
+                                            // blue
+                                            <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickLike} startIcon={<PanToolOutlinedIcon />}>Moi aussi</Button>
+                                        ) : (
+                                            // gris
+                                            <Button variant="text" color="primary" style={bottomBtnGroup_child} onClick={clickLike} startIcon={<PanToolIcon />}>Moi aussi</Button>
+                                        )
+                                        }
+                                        <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
+                                        <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button>
+                                    </div>
+                                </ThemeProvider>
+                                <div className="commentsWrapper">
+                                    <div style={{ display: 'flex' }}>
+                                        <TextField value={commentVal} onChange={(e) => setCommentVal(e.target.value)} fullWidth placeholder="Ajouter commentaire..." sx={{ marginBottom: '10px' }} />
+                                        <IconButton onClick={handleComment}>
+                                            <SendIcon style={{ fontSize: 35 }} />
+                                        </IconButton>
+                                    </div>
+                                    {(comments.length > 0) ?
+                                        comments.map((comment) => <div key={comment.id} className="oneComment">
+                                            <div className="oneComment_content">
+                                                <img src="public/assets/pdp/bobo.jpg" alt="" className="postProfileImg commentProfilepic" />
+                                                <div className="eachContentComment">
+                                                    <span className="comment_username" >{comment.account?.username}</span>
+                                                    <span className="comment_content" >
+                                                        {comment.contenu}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div className="oneComment_advice">
+                                                {!ResponseLikeClicked ? (
+                                                    <>
+                                                        {/* boutton pas cliqué */}
+                                                        <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" />
+                                                        <span color="warning">42</span>
+                                                    </>
+                                                ) : (<>
+                                                    {/* boutton cliqué */}
+                                                    <ThumbUpIcon color="anger" onClick={clickAdvice} />
+                                                    <span color="warning">43</span>
+                                                </>
+                                                )}
+
+                                            </div>
+                                        </div>) : <div className="commentsWrapper" style={{ textAlign: 'center' }}> Aucun Commentaires </div>}
                                 </div>
                             </div>
-                            <div className="oneComment_advice">
-                                {!ResponseLikeClicked ? (
-                                    <>
-                                        boutton pas cliqué 
-                <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" />
-                <span color="warning">42</span>
-            </>
-            ) : (<>
-                boutton cliqué 
-                <ThumbUpIcon color="anger" onClick={clickAdvice} />
-                <span color="warning">43</span>
-            </>
-                                )}
-
-        </div>
-                        </div >
-         fin boucle
-                    </div >
-                } */}
-
+                        </div>
+                    </Box>
+                </Modal>
             </div >
-        </div >
-
+        </div>
     )
 }
 

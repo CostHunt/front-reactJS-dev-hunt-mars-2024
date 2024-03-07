@@ -18,7 +18,7 @@ function share({ setPosts }) {
     const submit = (data) => {
         if (data.description != '') {
             createNewPost(token, data.description, "1b2621e0-a558-4a65-9f5f-a060617af55d", user.id).then((resp) => {
-                setPosts((p) => [...p, resp.data])
+                setPosts((p) => [resp.data, ...p])
             })
         }
     }
