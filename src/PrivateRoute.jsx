@@ -10,6 +10,6 @@ export function PrivateRoute() {
 
 export function PrivateRouteReverse() {
     const user = useAuth()
-    if (user.token) return <Navigate to="/" />
+    if (user.token) return <Navigate to="/home" />
     return <Outlet />
 }

@@ -1,0 +1,13 @@
+.sideBar{
+  background-color: green;
+  width : 10%;
+  height: 100%;
+}
+
+menuitem :active {
+  color: rgb(0, 126, 0, 0.5);
+}
+
+.Logout{
+   margin-top:50%;
+}

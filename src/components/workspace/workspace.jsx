@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout'
 
 import Card from '@mui/material/Card';
@@ -8,19 +8,37 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OneDoc from './oneDoc';
+import { getAllDocs } from '../../utils/workspace';
+import { useAuth } from '../../providers/AuthProvider';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> adbe0b03dfc7262b64ed2df68705fe99d3a5101c
 
 function Workspace() {
-  const Group=()=>{
+
+  const { token, user } = useAuth()
+
+  const [projets, setProjet] = useState([])
+
+  useEffect(() => {
+    getAllDocs(token, user.id).then((resp) => {
+      setProjet(resp)
+    })
+  }, [])
+
+  const Group = () => {
     return (
       <div className="dossierwrapper">
-        <OneDoc id='1' title='Centrer un div' description='Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all '/>
+        {projets.map((projet) =>
+          <OneDoc id={projet.id} title={projet.nom_project} categorie={projet.categorie} code={projet.code} />
+        )}
       </div>
     )
   }
   return (
-    <Layout Children={<Group/>}></Layout>
+    <Layout Children={<Group />}></Layout>
   )
 }
 
