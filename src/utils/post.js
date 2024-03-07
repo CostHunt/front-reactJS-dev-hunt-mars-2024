@@ -41,3 +41,21 @@ export async function likePost(token, userid, postid){
     })
     return resp
 }
+
+export async function deletePost(token, postid){
+    const resp = await _http.delete(`/post/${postid}`, {
+        headers: {
+            'X-access-token': token
+        }
+    })
+    return resp
+}
+
+export async function isResolved(token, postid){
+    const resp = await _http.put(`post/isresolved/${postid}`, {
+        headers: {
+            'X-access-token': token
+        }
+    })
+    return resp
+}

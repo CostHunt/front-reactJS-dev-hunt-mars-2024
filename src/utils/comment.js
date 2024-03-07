@@ -15,8 +15,6 @@ export async function comment(token, idAccount, idPost, contenu){
         id_post:idPost,
         contenu:contenu
     }
-    console.log(idAccount)
-    console.log(idPost)
     const resp = await _http.post('/comment', body, {
         headers: {
             'X-access-token': token
