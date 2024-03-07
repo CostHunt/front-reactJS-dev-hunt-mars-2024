@@ -8,7 +8,7 @@ import Layout from "../../Layout"
 import Topbar from "../../components/topbar/topbar"
 import Sidebar from "../../components/sidebar/sidebar"
 import Rightbar from "../../components/rightbar/rightbar"
-import Feed from "../../components/feed/Feed"
+import Feed from "../../components/feed/feed"
 import Groupe from "../../components/groupe/groupe"
 
 function home() {

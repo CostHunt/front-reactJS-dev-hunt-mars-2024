@@ -1,6 +1,6 @@
 import "./feed.css"
 import Share from "../share/share"
-import Post from "../post/Post"
+import Post from "../post/post"
 import { Posts } from "../../dummyData"
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../utils/post"
