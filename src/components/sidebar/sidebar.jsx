@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./sidebar.css"
 import "./sidebar2.css"
 import "./bootstrapSide.css"
-import { RssFeed } from '@mui/icons-material';
+import { Height, RssFeed } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import ArticleIcon from '@mui/icons-material/Article';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -12,8 +12,13 @@ import MessageIcon from '@mui/icons-material/Message';
 import HistoryIcon from '@mui/icons-material/History';
 
 import OtherHousesOutlinedIcon from '@mui/icons-material/OtherHousesOutlined';
+import { useAuth } from "../../providers/AuthProvider";
+
+
+
 
 function sidebar() {
+  const {user} = useAuth();
   const navigate = useNavigate();
   return (
     // <div className="sidebar">
@@ -78,26 +83,26 @@ function sidebar() {
     <hr/>
   </div>
   <div id="nav-content">
-    <div class="nav-button"><i class="fas fa-home"></i><span>Accueil</span></div>
-    <div class="nav-button"><i class="fas fa-dumbbell"></i><span>Mon espace de travail</span></div>
+    <div class="nav-button" onClick={()=>{navigate('/home')}}><i class="fas fa-home"></i><span>Accueil</span></div>
+    <div class="nav-button" onClick={()=>{navigate('/workspace')}}><i class="fas fa-dumbbell"></i><span>Mon espace de travail</span></div>
     {/* <div class="nav-button"><i class="fas fa-thumbtack"></i><span>Groupe</span></div> */}
     <hr/>
-    <div class="nav-button"><i class="fas fa-code"></i><span>Coder</span></div>
+    <div class="nav-button" onClick={()=>{navigate('/Coding')}}><i class="fas fa-code"></i><span>Coder</span></div>
     {/* <div class="nav-button"><i class="fas fa-chart-line"></i><span>Trending</span></div>
     <div class="nav-button"><i class="fas fa-fire"></i><span>Challenges</span></div>
     <div class="nav-button"><i class="fas fa-magic"></i><span>Spark</span></div> */}
     <hr/>
-    <div class="nav-button"><i class="fas fa-info"></i><span>Cercle d'etude</span></div>
-    <div class="nav-button"><i class="fas fa-info"></i><span>C3LF</span></div>
-    <div class="nav-button"><i class="fas fa-info"></i><span>Cybersecurity</span></div>
-    <div class="nav-button"><i class="fas fa-info"></i><span>...</span></div>
+    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/home')}}></i><span>Cercle d'etude</span></div>
+    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/workspace')}}></i><span>C3LF</span></div>
+    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/coding')}}></i><span>Cybersecurity</span></div>
+    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/home')}}></i><span>...</span></div>
     <div id="nav-content-highlight"></div>
   </div>
   <input id="nav-footer-toggle" type="checkbox"/>
   <div id="nav-footer">
     <div id="nav-footer-heading">
       <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547"/></div>
-      <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank">Harena</a><span id="nav-footer-subtitle">arenanofidina@gmail.com</span></div>
+      <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank">{user.username}</a><span id="nav-footer-subtitle">arenanofidina@gmail.com</span></div>
       <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
     </div>
     {/* <div id="nav-footer-content">
