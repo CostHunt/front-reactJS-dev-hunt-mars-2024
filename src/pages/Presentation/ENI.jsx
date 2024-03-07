@@ -135,14 +135,15 @@ function ENI() {
                             initial={{ opacity: 0, x: 250 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 2 }}
-                        >Pulsations Vibrantes au Cœur de la Vie Étudiante </motion.h1>
+                        >L'Ecole Nationale d'Informatique, votre passerelle vers l'avenir de la technologie</motion.h1>
                         <motion.p
                             initial={{ opacity: 0, x: 450 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 2 }}
-                            className="Descri" style={{ fontSize: '120%' }}>Au-delà des activités académiques formelles, notre campus vibrant est le théâtre d'une variété d'événements sociaux, de rencontres inspirantes et de collaborations interdisciplinaires.
-                            Que ce soit lors de conférences, de séminaires ou d'ateliers, les étudiants ont l'occasion de rencontrer des experts du domaine, d'échanger des idées novatrices et de développer des compétences non seulement techniques,
-                            mais également des compétences interpersonnelles indispensables dans le monde professionnel.</motion.p>
+                            className="Descri" style={{ fontSize: '120%' }}>Située au cœur de Fianarantsoa, notre université est dédiée à l'excellence dans l'enseignement
+                            de l'informatique et à la formation de professionnels compétents et innovants.
+                            L’Ecole Nationale d’Informatique, en abrégé ENI, est un établissement d’enseignement supérieur rattaché 
+                            académiquement et administrativement à l’Université de Fianarantsoa.</motion.p>
                     </motion.div>
                 </motion.div>
 
