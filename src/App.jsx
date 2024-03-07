@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/Coding/Coding.jsx'
 import Groupe from './components/groupe/groupe.jsx'
 import ENI from './pages/Presentation/ENI.jsx'
+import Workspace from './components/workspace/workspace.jsx'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path='/groupe' element={<Groupe />} />
+          <Route path='/workspace' element={<Workspace />} />
         </Route>
 
         <Route path='/Coding' element={<Coding />} />
