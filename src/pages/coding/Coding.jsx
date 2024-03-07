@@ -36,6 +36,32 @@ function getinitialJs() {
     return "console.log(\"Hello World!\");"
 }
 
+const WaveIcon = ({ src, alt, delay }) => {
+    const controls = useAnimation();
+  
+    useEffect(() => {
+      controls.start({
+        x: [0, 0, 0, 0, 0], 
+        scale: [1, 1.4, 1, 1, 1],
+        transition: {
+          duration: 3, 
+          ease: "linear",
+          repeat: Infinity,
+          delay,
+        },
+      });
+    }, [controls, delay]);
+  
+    return (
+      <motion.img
+        style={{ width: "3%", marginRight: '10%' }}
+        src={src}
+        alt={alt}
+        animate={controls}
+      />
+    );
+  };
+
 export default function Coding() {
 
     const { token } = useAuth()
@@ -179,10 +205,30 @@ export default function Coding() {
                                 <MenuItem value="html" disabled>HTML</MenuItem>
                             </Select>
                         </motion.div>
-                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" />
-                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" />
-                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg" />
-                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg" />
+                        
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <WaveIcon 
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg"
+                                alt="Bash Icon"
+                                delay={0}
+                            />
+                            <WaveIcon
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg"
+                                alt="C Icon"
+                                delay={0.5}
+                            />
+                            <WaveIcon
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg"
+                                alt="JavaScript Icon"
+                                delay={1}
+                            />
+                            <WaveIcon
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg"
+                                alt="HTML5 Icon"
+                                delay={1.5}
+                            />
+                        </div>
+                        
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.8 }}
