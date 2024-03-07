@@ -11,6 +11,7 @@ export async function getAllDocs(token, uid){
 
 
 export async function createDocs(token, data){
+    console.log(data)
     const resp = await _http.post("/project/" ,data, {
         headers: {
             'X-access-token': token

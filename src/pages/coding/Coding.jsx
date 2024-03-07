@@ -68,6 +68,7 @@ export default function Coding() {
     }
 
     const { register, handleSubmit } = useForm()
+    const { user } = useAuth()
 
     const handleSave = (data) => {
         data['categorie'] = language
@@ -77,6 +78,7 @@ export default function Coding() {
                 console.log("updated")
             })
         } else {
+            data['id_account'] = user.id
             createDocs(token, data).then(() => {
                 console.log("created")
             })
@@ -261,7 +263,7 @@ export default function Coding() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <TextField label="Nom du projet" fullWidth {...register("nom_project")} />
+                        <TextField label="Nom du projet" fullWidth {...register("nom_project")} defaultValue={localStorage.nom_project} />
                         <LoadingButton color='success' variant='contained' onClick={handleSubmit(handleSave)} endIcon={<SaveIcon />}> Save </LoadingButton>
                     </Box>
                 </Modal>

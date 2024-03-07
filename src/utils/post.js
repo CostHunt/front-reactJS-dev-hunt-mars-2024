@@ -9,11 +9,12 @@ export async function getAllPosts(token){
     return resp
 }
 
-export async function createNewPost(token, descr, idGroupe, idAccount){
+export async function createNewPost(token, descr, code, idGroupe, idAccount){
     const body = {
         description : descr,
         id_groupe : idGroupe,
-        id_account : idAccount
+        id_account : idAccount,
+        code: code,
     }
     const resp = await _http.post("/post",body, {
         headers: {

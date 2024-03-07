@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import './workspace.css'
 
 
-export default function OneDoc({ id, title, description, categorie, code }) {
+export default function OneDoc({ id, title, description, categorie, nom, code }) {
 
   let image = ''
   if (categorie == 'c') image = '/assets/other/c.png'
@@ -37,6 +37,7 @@ export default function OneDoc({ id, title, description, categorie, code }) {
         <Link to='/Coding'> <Button size="small" onClick={() => {
           localStorage.setItem('code', code)
           localStorage.setItem('language', categorie)
+          localStorage.setItem('nom_project', nom)
           localStorage.setItem('id_project', id)
         }}>Reprendre</Button> </Link>
       </CardActions>
