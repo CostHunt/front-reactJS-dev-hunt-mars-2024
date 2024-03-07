@@ -9,13 +9,15 @@ export async function getAllPosts(token){
     return resp
 }
 
-export async function createNewPost(token, descr, code, idGroupe, idAccount){
+export async function createNewPost(token, descr, idGroupe, idAccount){
     const body = {
         description : descr,
         id_groupe : idGroupe,
         id_account : idAccount,
-        code: code,
+        code: null,
     }
+
+    console.log(body)
     const resp = await _http.post("/post",body, {
         headers: {
             'X-access-token': token
