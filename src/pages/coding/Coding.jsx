@@ -6,15 +6,20 @@ import { _http } from '../../utils/http';
 import { getinitialC, getinitialJs } from './minimalCode';
 import { LoadingButton } from '@mui/lab';
 import './coding.css'
-import {motion} from 'framer-motion' 
+import { motion } from 'framer-motion'
+import Layout from '../../Layout';
+import { auto } from '@popperjs/core';
 
 export default function Coding() {
 
-    const [language, setLanguage] = useState("c")
 
     const [output, setOutput] = useState("")
 
-    const [editorValue, setEditorValue] = useState(getinitialC())
+    const val = (localStorage.getItem('code') != null) ? localStorage.getItem('code') : getinitialC()
+    const lan = (localStorage.getItem('language') != null) ? localStorage.getItem('language') : 'c'
+
+    const [editorValue, setEditorValue] = useState(val)
+    const [language, setLanguage] = useState(lan)
 
     const [loading, setLoading] = useState(false)
 
@@ -38,7 +43,7 @@ export default function Coding() {
             code: editorValue,
             language: currentLanguage
         }
-        _http.post('/project/run/code/', body, {
+        _http.post('/run/code/', body, {
             headers: {
                 'X-access-token': "xxx"
             },
@@ -51,8 +56,8 @@ export default function Coding() {
             }
             setLoading(false)
             setExecTime(new Date() - dateDeb)
-        }).catch(() => {
-            console.log("erreur du compilateur")
+        }).catch((e) => {
+            console.log(e)
             setLoading(false)
         })
 
@@ -67,140 +72,128 @@ export default function Coding() {
         else setEditorValue("")
     }
 
-    // const [dark, setDark] = useState(true)
 
     return (
-        <div >
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Anta&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap')
-            </style>
+        <Layout Children={
+            <div style={{ marginLeft: '5%' }}>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Anta&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap')
+                </style>
 
-            <div style={{ display: 'flex', alignItems: 'center' , marginLeft : "19%"}}>
-            <motion.img
-                width="52"
-                height="52"
-                src="https://img.icons8.com/fluency/48/laptop-coding.png"
-                alt="laptop-coding"
-                animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
-            />
-            <motion.p className='Name'
-                style={{ marginLeft: '10px' }}
-                animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
-            >
-                CODING SPACE
-            </motion.p>
-            </div>
-          
-            <div style={{width: '80%', marginTop : '1%', float :'right', marginRight : '1%'}}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <motion.img
+                        width="52"
+                        height="52"
+                        src="https://img.icons8.com/fluency/48/laptop-coding.png"
+                        alt="laptop-coding"
+                        animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
+                    />
+                    <motion.p className='Name'
+                        style={{ marginLeft: '10px' }}
+                        animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
+                    >
+                        CODING SPACE
+                    </motion.p>
+                </div>
+
+                <div style={{ width: '95%', marginTop: '1%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <motion.div
+                            initial={{ opacity: 0, y: -150 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 260,
+                                damping: 20
+                            }}
+                            style={{ marginBottom: '1%' }}
+                        >
+                            <Select
+                                value={language}
+                                onChange={handleLanguage}
+                                sx={{ width: '125px', borderRadius: "10px" }}
+                            >
+                                <MenuItem value="javascript">Javascript</MenuItem>
+                                <MenuItem value="c">C</MenuItem>
+                                <MenuItem value="shell" disabled>Shell</MenuItem>
+                                <MenuItem value="html" disabled>HTML</MenuItem>
+                            </Select>
+                        </motion.div>
+                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" />
+                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" />
+                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg" />
+                        <img style={{ width: "3%" }} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg" />
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.8 }}
+                            style={{ marginTop: "1%" }}>
+                            <LoadingButton
+                                loading={loading}
+                                loadingPosition="end"
+                                variant="contained"
+                                onClick={sendValue} endIcon={<PlayArrowIcon />}
+                            >
+                                Run Code
+                            </LoadingButton>
+                        </motion.div>
+                    </div>
+
                     <motion.div
-                        initial={{ opacity: 0, y: -150 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         transition={{
                             type: "spring",
                             stiffness: 260,
                             damping: 20
                         }}
-                        style={{marginBottom : '1%'}}
-                    >
-                        <Select
-                            value={language}
-                            onChange={handleLanguage}
-                            sx={{ width: '125px', borderRadius :"10px" }}
-                        >
-                            <MenuItem value="javascript">Javascript</MenuItem>
-                            <MenuItem value="c">C</MenuItem>
-                            <MenuItem value="shell">Shell</MenuItem>
-                            <MenuItem value="html">HTML</MenuItem>
-                        </Select>
-                    </motion.div>
-                    <img style={{width : "3%"}} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" />
-                    <img style={{width : "3%"}} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" />
-                    <img style={{width : "3%"}} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg" />
-                    <img style={{width : "3%"}} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg" />          
-                    <motion.div 
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.8 }}
-                        style={{marginTop: "1%"}}>
-                        <LoadingButton
-                            loading={loading}
-                            loadingPosition="end"
-                            variant="contained"
-                            onClick={sendValue} endIcon={<PlayArrowIcon />}
-                        >
-                            Run Code
-                        </LoadingButton>
-                    </motion.div>
-                </div>
-
-                <motion.div 
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20
-                    }}
-                    style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center'}}>
-                    <div style={{ width: '60%', borderRadius :'10px' }}>
-                        <Editor
-                            height="80vh"
-                            language={language}
-                            value={editorValue}
-                            onChange={handleEditorChange}
-                            theme={'vs-dark'}
-                        />
-                    </div>
-                    <div style={{ color: 'white', width: '40%' , margin : "2%", padding:"1%"}}>
-                        <div style={{ width: '100%', marginTop: 10 }}>
-                            <TextField
-                                id="outlined-basic"
-                                variant="outlined"
-                                label='Input values'
-                                InputLabelProps={{ style: { color: 'white' } }}
-                                sx={{
-                                    input: {
-                                        color: 'white', height: '30vh', borderRadius: "15px",
-                                    },
-                                    '& .MuiOutlinedInput-notchedOutline': {
-                                        border: 'solid 1px white'
-                                    },
-                                    '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        border: 'solid 1px cyan'
-                                    }
-                                }}
-                                fullWidth
+                        style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center' }}>
+                        <div style={{ width: '60%', borderRadius: '10px' }}>
+                            <Editor
+                                height="80vh"
+                                language={language}
+                                value={editorValue}
+                                onChange={handleEditorChange}
+                                theme={'vs-dark'}
                             />
                         </div>
-                        <div style={{ marginTop: '5%' }}>
-                            <TextField
-                                id="outlined-basic"
-                                variant="outlined"
-                                label='Output'
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                                value={output}
-                                InputLabelProps={{ style: { color: 'white' } }}
-                                sx={{
-                                    input: {
-                                        color: 'white', height: '30vh', borderRadius: "15px",
-                                    },
-                                    '& .MuiOutlinedInput-notchedOutline': {
-                                        border: 'solid 1px white'
-                                    },
-                                    '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        border: 'solid 1px cyan'
-                                    }
-                                }}
-                                fullWidth
-                            />
+                        <div style={{ color: 'white', width: '40%', margin: "2%", padding: "1%" }}>
+                            <div style={{ width: '100%', marginTop: 10 }}>
+                                Input Values
+                                <TextField
+                                    id="outlined-basic"
+                                    variant="outlined"
+                                    InputLabelProps={{ style: { color: 'white' } }}
+                                    sx={{
+                                        input: {
+                                            color: 'white', height: '30vh', borderRadius: "15px",
+                                        },
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            border: 'solid 1px white'
+                                        },
+                                        '&:hover .MuiOutlinedInput-notchedOutline, & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                            border: 'solid 1px cyan'
+                                        }
+                                    }}
+                                    fullWidth
+                                />
+                            </div>
+                            <div style={{ marginTop: '5%', }}>
+                                Output
+                                <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', width: '100%', border: '1px solid white', height: '30vh', borderRadius: '3px' }}>
+                                    {output.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                            </div>
                             {execTime / 1000} s
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </div>
-        </div>
+        } />
 
     )
 }

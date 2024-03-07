@@ -8,7 +8,7 @@ import { useAuth } from "../../providers/AuthProvider"
 import { Skeleton, Stack } from "@mui/material"
 
 
-function Feed() {
+function feed() {
 
   const [posts, setPosts] = useState()
 
@@ -56,4 +56,4 @@ function Feed() {
   )
 }
 
-export default Feed
+export default feed

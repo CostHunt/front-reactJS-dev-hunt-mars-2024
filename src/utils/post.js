@@ -1,7 +1,7 @@
 import { _http } from "./http";
 
 export async function getAllPosts(token){
-    const resp = await _http.get("/post", {
+    const resp = await _http.get("post/limit/30", {
         headers: {
             'X-access-token': token
         }

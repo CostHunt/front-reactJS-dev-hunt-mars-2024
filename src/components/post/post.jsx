@@ -60,7 +60,7 @@ const theme = createTheme({
 });
 
 
-function Post({ post }) {
+function post({ post }) {
 
     const [likeClicked, setLikeClicked] = useState(false);
 
@@ -268,4 +268,4 @@ function Post({ post }) {
     )
 }
 
-export default Post
+export default post
