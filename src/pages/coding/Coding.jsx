@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Editor } from '@monaco-editor/react'
-import { Select, MenuItem, Switch, TextField, Button } from '@mui/material'
+import { Modal, Select, MenuItem, Switch, TextField, Button, Box } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { _http } from '../../utils/http';
 import { LoadingButton } from '@mui/lab';
@@ -8,6 +8,25 @@ import './coding.css'
 import { motion } from 'framer-motion'
 import Layout from '../../Layout';
 import { auto } from '@popperjs/core';
+import SaveIcon from '@mui/icons-material/Save';
+import { createDocs, updateDocs } from '../../utils/workspace';
+import { useAuth } from '../../providers/AuthProvider';
+import { useForm } from 'react-hook-form';
+
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+};
 
 function getinitialC() {
     return "#include <stdio.h>\n#include <stdlib.h>\n\nint main()\n{\n\tprintf(\"Hello World!\");\n\treturn 0;\n}"
@@ -19,6 +38,7 @@ function getinitialJs() {
 
 export default function Coding() {
 
+    const { token } = useAuth()
 
     const [output, setOutput] = useState("")
 
@@ -32,8 +52,34 @@ export default function Coding() {
 
     const [execTime, setExecTime] = useState(null)
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const handleEditorChange = (e) => {
         setEditorValue(e);
+    }
+
+    const { register, handleSubmit } = useForm()
+
+    const handleSave = (data) => {
+        data['categorie'] = language
+        data['code'] = editorValue
+        if (localStorage.getItem('id_project') != null) {
+            updateDocs(token, data, localStorage.getItem('id_project')).then(() => {
+                console.log("updated")
+            })
+        } else {
+            createDocs(token, data).then(() => {
+                console.log("created")
+            })
+        }
+        console.log(data)
+        handleClose()
     }
 
     function sendValue() {
@@ -87,20 +133,23 @@ export default function Coding() {
                     @import url('https://fonts.googleapis.com/css2?family=Anta&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap')
                 </style>
 
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <motion.img
-                        width="52"
-                        height="52"
-                        src="https://img.icons8.com/fluency/48/laptop-coding.png"
-                        alt="laptop-coding"
-                        animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
-                    />
-                    <motion.p className='Name'
-                        style={{ marginLeft: '10px' }}
-                        animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
-                    >
-                        CODING SPACE
-                    </motion.p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '95%' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <motion.img
+                            width="52"
+                            height="52"
+                            src="https://img.icons8.com/fluency/48/laptop-coding.png"
+                            alt="laptop-coding"
+                            animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
+                        />
+                        <motion.p className='Name'
+                            style={{ marginLeft: '10px' }}
+                            animate={{ y: [0, -8, 0, 8, 0], transition: { repeat: Infinity, duration: 2 } }}
+                        >
+                            CODING SPACE
+                        </motion.p>
+                    </div>
+                    <LoadingButton color='success' variant='contained' onClick={handleOpen} endIcon={<SaveIcon />}> Save </LoadingButton>
                 </div>
 
                 <div style={{ width: '95%', marginTop: '1%' }}>
@@ -199,6 +248,17 @@ export default function Coding() {
                         </div>
                     </motion.div>
                 </div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <TextField label="Nom du projet" fullWidth {...register("nom_project")} />
+                        <LoadingButton color='success' variant='contained' onClick={handleSubmit(handleSave)} endIcon={<SaveIcon />}> Save </LoadingButton>
+                    </Box>
+                </Modal>
             </div>
         } />
 

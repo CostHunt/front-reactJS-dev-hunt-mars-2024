@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
 
-export default function OneDoc({ title, description, categorie, code }) {
+export default function OneDoc({ id, title, description, categorie, code }) {
 
   let image = ''
   if (categorie == 'c') image = '/assets/other/c.png'
@@ -34,6 +34,7 @@ export default function OneDoc({ title, description, categorie, code }) {
         <Link to='/Coding'> <Button size="small" onClick={() => {
           localStorage.setItem('code', code)
           localStorage.setItem('language', categorie)
+          localStorage.setItem('id_project', id)
         }}>Reprendre</Button> </Link>
       </CardActions>
     </Card>

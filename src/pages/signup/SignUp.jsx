@@ -105,7 +105,7 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('username')}
+                  {...register('username', { required: "Recipe name is required" })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -120,7 +120,7 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('matricule')}
+                  {...register('matricule', { required: "Recipe name is required" })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,7 +134,7 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('email')}
+                  {...register('email', { required: "Recipe name is required" })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -149,8 +149,11 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '5%' },
                   }}
-                  {...register('password')}
+                  {...register('password', { required: "Recipe name is required" })}
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <input type="file" accept='image/*' {...register('image')} />
               </Grid>
             </Grid>
             <Button
@@ -163,7 +166,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
