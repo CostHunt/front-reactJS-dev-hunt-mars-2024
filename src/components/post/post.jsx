@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../providers/AuthProvider";
 
 import { getUser } from "../../utils/account";
-import { deletePost, likePost } from "../../utils/post";
+import { deletePost, isResolved, likePost } from "../../utils/post";
 import { comment, getComment } from "../../utils/comment";
 
 
@@ -120,6 +120,14 @@ function Post({ post }) {
         setResponseLikeClicked(!ResponseLikeClicked);
     }
 
+    const handleResolved = () => {
+        isResolved(token, post.id).then(() => {
+            console.log("success")
+        })
+        if (resolved) setResolved(false)
+        else setResolved(true)
+    }
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -159,7 +167,7 @@ function Post({ post }) {
                         )
                         }
                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
-                        {(isMyPost) ? <Button variant="text" color={(resolved) ? "success" : "originalBtnColour"} style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
+                        {(isMyPost) ? <Button variant="text" onClick={handleResolved} color={(resolved) ? "success" : "originalBtnColour"} style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
                     </div>
                 </ThemeProvider>
 
@@ -212,7 +220,7 @@ function Post({ post }) {
                                         )
                                         }
                                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
-                                        {(isMyPost) ? <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
+                                        {(isMyPost) ? <Button variant="text" onClick={handleResolved} color={(resolved) ? "success" : "originalBtnColour"} style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
                                     </div>
                                 </ThemeProvider>
                                 <div className="commentsWrapper">
