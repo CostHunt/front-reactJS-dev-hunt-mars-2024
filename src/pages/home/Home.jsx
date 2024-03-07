@@ -1,12 +1,24 @@
-import React from 'react'
-import { useAuth } from '../../providers/AuthProvider'
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import "./home.css"
 
-export default function Home() {
-    const user = useAuth()
+import Layout from "../../Layout"
+
+
+import Topbar from "../../components/topbar/topbar"
+import Sidebar from "../../components/sidebar/sidebar"
+import Rightbar from "../../components/rightbar/rightbar"
+import Feed from "../../components/feed/Feed"
+import Groupe from "../../components/groupe/groupe"
+
+function home() {
+    const location = useLocation();
+
+
     return (
-        <div>
-            Test Home
-            <button onClick={user.logout}> logout </button>
-        </div>
+        <Layout Children={<Feed />} />
+
     )
 }
+
+export default home

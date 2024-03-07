@@ -13,28 +13,26 @@ export default function AuthProvider({ children }) {
         localStorage.token :
         (sessionStorage.token != null) ? sessionStorage.token : null
 
-    const [token, setToken] = useState(lastToken)
+    const lastUser = (localStorage.user != null) ?
+        localStorage.user :
+        (sessionStorage.user != null) ? sessionStorage.user : null
 
-    const login = async (username, password) => {
-        const data = {
-            username: username,
-            password: password
-        }
-        const resp = await _http.post('/auth/login', JSON.stringify(data))
-        return resp.data.token
-    }
+    const [token, setToken] = useState(lastToken)
+    const [user, setUser] = (lastUser != null) ? useState(JSON.parse(lastUser)) : useState(null)
 
     const logout = () => {
         setToken(null)
-        localStorage.removeItem('token')
-        sessionStorage.removeItem('token')
+        setUser(null)
+        localStorage.clear()
+        sessionStorage.clear()
     }
 
     const value = {
         token,
         setToken,
-        login,
-        logout
+        logout,
+        user,
+        setUser
     }
 
     return (
