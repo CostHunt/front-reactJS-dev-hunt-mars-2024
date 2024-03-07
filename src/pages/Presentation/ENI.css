@@ -38,10 +38,11 @@
     display: flex;
     justify-content: center;
     width: 99vw;
-    border-top: 3px solid transparent; /* Définissez l'épaisseur et le style de la bordure */
+    border-top: 3px solid transparent;
     border-image: linear-gradient(45deg, #ffffff, #1C315E, #88A47C, #ffffff); /* Définissez le dégradé pour la bordure */
     border-image-slice: 1; 
-    
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 .Body {
     margin-bottom: 7%;
