@@ -8,7 +8,15 @@ import Badge from '@mui/material/Badge';
 import { IconButton } from "@mui/material";
 import { useAuth } from "../../providers/AuthProvider";
 
+import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
+
 function topbar() {
+
+    const navigate = useNavigate();
 
     const { logout } = useAuth()
 
@@ -51,8 +59,30 @@ function topbar() {
                             <LogoutIcon sx={{ color: 'white' }} />
                         </IconButton>
                     </div>
-
-                    <img className="topbarImg" src="public/assets/pdp/costhuntLogo.png" alt="pdp" />
+                    <PopupState variant="popover" popupId="demo-popup-popover">
+                    {(popupState) => (
+                        <div>
+                            <img className="topbarImg" src="public/assets/pdp/costhuntLogo.png" alt="pdp" {...bindTrigger(popupState)}/>
+                        <Popover
+                            {...bindPopover(popupState)}
+                            anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                            }}
+                        >
+                            <div className="account-popover">
+                                <Typography className="account-popover-element"  sx={{ p: 2 }} onClick={()=>{navigate('/workspace')}}>Mes dossiers de travail</Typography>
+                                <Typography className="account-popover-element"  sx={{ p: 2 }}>N'importe quoi</Typography>
+                            </div>
+                        </Popover>
+                        </div>
+                    )}
+    </PopupState>
+                    
                 </div>
             </div>
         </div>

@@ -63,7 +63,7 @@ function sidebar() {
             <CalendarMonthIcon/>
           </div>
           <div id="title">
-            Calendrier
+            Mes dossiers de travail
           </div>
         </li>
       </ul>

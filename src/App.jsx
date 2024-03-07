@@ -6,6 +6,7 @@ import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/coding/Coding.jsx'
 import Groupe from './components/groupe/groupe.jsx'
+import Workspace from './components/workspace/workspace.jsx'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path='/Coding' element={<Coding />} />
           <Route path='/groupe' element={<Groupe />} />
+          <Route path='/workspace' element={<Workspace />} />
         </Route>
 
         <Route path='/Coding' element={<Coding />} />

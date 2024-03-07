@@ -80,3 +80,9 @@
     border-radius: 50%;
     cursor: pointer;
 }
+.account-popover .account-popover-element{
+    cursor: pointer;
+}
+.account-popover .account-popover-element:hover{
+    background: #acaaaa;
+}
