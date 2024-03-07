@@ -29,13 +29,13 @@ function Feed() {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share setPosts={setPosts} />
         {(loading) ? <div>
+          {/* <Share setPosts={setPosts} /> */}
           <Stack spacing={1}>
             <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
             <Skeleton variant="circular" width={50} height={50} />
-            <Skeleton variant="rectangular" height={60} />
-            <Skeleton variant="rounded" height={60} />
+            <Skeleton variant="rectangular" width={700} height={60} />
+            <Skeleton variant="rounded" width={700} height={60} />
           </Stack>
           <Stack spacing={1}>
             <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
@@ -44,9 +44,13 @@ function Feed() {
             <Skeleton variant="rounded" height={60} />
           </Stack>
         </div> :
-          (posts) ? posts.map((p, i) => (
-            <Post key={i} post={p} />
-          )) : null}
+          <>
+            <Share setPosts={setPosts} />
+            {(posts) ? posts.map((p, i) => (
+              <Post key={i} post={p} />
+            )) : null}
+          </>
+        }
       </div>
     </div>
   )

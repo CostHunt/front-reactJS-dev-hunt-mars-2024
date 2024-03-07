@@ -23,12 +23,13 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined'; //l
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';//like filled
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useEffect, useState } from "react";
 import { useAuth } from "../../providers/AuthProvider";
 
 import { getUser } from "../../utils/account";
-import { likePost } from "../../utils/post";
+import { deletePost, likePost } from "../../utils/post";
 import { comment, getComment } from "../../utils/comment";
 
 
@@ -69,6 +70,8 @@ function Post({ post }) {
 
     const [commentVal, setCommentVal] = useState('')
 
+    const [resolved, setResolved] = useState(false)
+
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
 
@@ -84,13 +87,15 @@ function Post({ post }) {
     const isMyPost = post.id_account == user.id
 
     const handleComment = () => {
-        comment(user.token, user.id, post.id, commentVal).then((resp) => {
+        comment(token, user.id, post.id, commentVal).then((resp) => {
             setComments((c) => [...c, resp])
         })
     }
 
-    const handleResolve = () => {
-
+    const handleDelete = () => {
+        deletePost(token, post.id).then((resp) => {
+            window.location.reload()
+        })
     }
 
     const clickLike = () => {
@@ -126,7 +131,9 @@ function Post({ post }) {
                     </div>
                     {isMyPost ?
                         <div className="postTopRight">
-                            <MoreVertIcon />
+                            <IconButton onClick={handleDelete}>
+                                <DeleteIcon />
+                            </IconButton>
                         </div> : null}
                 </div>
                 <div className="postCenter">
@@ -152,7 +159,7 @@ function Post({ post }) {
                         )
                         }
                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
-                        {(isMyPost) ? <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
+                        {(isMyPost) ? <Button variant="text" color={(resolved) ? "success" : "originalBtnColour"} style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
                     </div>
                 </ThemeProvider>
 
@@ -205,7 +212,7 @@ function Post({ post }) {
                                         )
                                         }
                                         <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} onClick={clickComment} startIcon={<ChatBubbleOutlineRoundedIcon />}>Réponses</Button>
-                                        <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button>
+                                        {(isMyPost) ? <Button variant="text" color="originalBtnColour" style={bottomBtnGroup_child} startIcon={<DoneOutlineRoundedIcon />}>Résolu</Button> : null}
                                     </div>
                                 </ThemeProvider>
                                 <div className="commentsWrapper">
