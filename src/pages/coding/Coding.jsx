@@ -3,12 +3,19 @@ import { Editor } from '@monaco-editor/react'
 import { Select, MenuItem, Switch, TextField, Button } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { _http } from '../../utils/http';
-import { getinitialC, getinitialJs } from './minimalCode';
 import { LoadingButton } from '@mui/lab';
 import './coding.css'
 import { motion } from 'framer-motion'
 import Layout from '../../Layout';
 import { auto } from '@popperjs/core';
+
+function getinitialC() {
+    return "#include <stdio.h>\n#include <stdlib.h>\n\nint main()\n{\n\tprintf(\"Hello World!\");\n\treturn 0;\n}"
+}
+
+function getinitialJs() {
+    return "console.log(\"Hello World!\");"
+}
 
 export default function Coding() {
 
