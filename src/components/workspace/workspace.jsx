@@ -11,10 +11,6 @@ import OneDoc from './oneDoc';
 import { getAllDocs } from '../../utils/workspace';
 import { useAuth } from '../../providers/AuthProvider';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> adbe0b03dfc7262b64ed2df68705fe99d3a5101c
 
 function Workspace() {
 
