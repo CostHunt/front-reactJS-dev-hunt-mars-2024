@@ -31,6 +31,8 @@ import { useAuth } from "../../providers/AuthProvider";
 import { getUser } from "../../utils/account";
 import { deletePost, isResolved, likePost } from "../../utils/post";
 import { comment, getComment } from "../../utils/comment";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 
 const style = {
@@ -147,7 +149,12 @@ function post({ post }) {
                 <div className="postCenter">
                     <span className="postText">{post?.description}</span><br />
                     <div className="postImages">
-                        <img src={post?.attachedfiles?.url} alt="" className="postImg" />
+                        {(post?.code != null) ?
+                            <SyntaxHighlighter language="javascript" style={docco}>
+                                {post?.code}
+                            </SyntaxHighlighter> : null
+                        }
+
                     </div>
                 </div>
                 <ThemeProvider theme={theme}>
@@ -200,7 +207,11 @@ function post({ post }) {
                                 <div className="postCenter">
                                     <span className="postText">{post?.description}</span><br />
                                     <div className="postImages">
-                                        <img src={post?.attachedfiles?.url} alt="" className="postImg" />
+                                        {(post?.code != null) ?
+                                            <SyntaxHighlighter language="javascript" style={docco}>
+                                                {post?.code}
+                                            </SyntaxHighlighter> : null
+                                        }
                                     </div>
                                 </div>
                                 <ThemeProvider theme={theme}>
