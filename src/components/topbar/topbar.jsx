@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 
 function topbar() {
 
-    
-    
+
+
     const navigate = useNavigate();
     const { logout } = useAuth()
     return (
@@ -61,29 +61,29 @@ function topbar() {
                         </IconButton>
                     </div> */}
                     <PopupState variant="popover" popupId="demo-popup-popover">
-                    {(popupState) => (
-                        <div>
-                            <img className="topbarImg" src="public/assets/pdp/costhuntLogo.png" alt="pdp" {...bindTrigger(popupState)}/>
-                        <Popover
-                            {...bindPopover(popupState)}
-                            anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                            }}
-                            transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                            }}
-                        >
-                            <div className="account-popover">
-                                <Typography className="account-popover-element"  sx={{ p: 2 }} onClick={()=>{navigate('/workspace')}}>Mes dossiers de travail</Typography>
-                                <Typography className="account-popover-element"  sx={{ p: 2,color:'red' }} onClick={logout}><LogoutIcon /> Se déconnecter</Typography>
+                        {(popupState) => (
+                            <div>
+                                <img className="topbarImg" src="/assets/pdp/costhuntLogo.png" alt="pdp" {...bindTrigger(popupState)} />
+                                <Popover
+                                    {...bindPopover(popupState)}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'center',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                >
+                                    <div className="account-popover">
+                                        <Typography className="account-popover-element" sx={{ p: 2 }} onClick={() => { navigate('/workspace') }}>Mes dossiers de travail</Typography>
+                                        <Typography className="account-popover-element" sx={{ p: 2, color: 'red' }} onClick={logout}><LogoutIcon /> Se déconnecter</Typography>
+                                    </div>
+                                </Popover>
                             </div>
-                        </Popover>
-                        </div>
-                    )}
-    </PopupState>
-                    
+                        )}
+                    </PopupState>
+
                 </div>
             </div>
         </div>

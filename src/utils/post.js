@@ -13,8 +13,11 @@ export async function createNewPost(token, descr, idGroupe, idAccount){
     const body = {
         description : descr,
         id_groupe : idGroupe,
-        id_account : idAccount
+        id_account : idAccount,
+        code: null,
     }
+
+    console.log(body)
     const resp = await _http.post("/post",body, {
         headers: {
             'X-access-token': token
@@ -34,7 +37,7 @@ export async function getPostsbyGroup(token, idGroupe){
 }
 
 export async function likePost(token, userid, postid){ 
-    const resp = await _http.put(`/post/${userid}/like/${postid}/`, {
+    const resp = await _http.put(`/post/${userid}/like/${postid}/`, {}, {
         headers: {
             'X-access-token': token
         }

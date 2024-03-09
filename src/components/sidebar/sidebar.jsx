@@ -18,7 +18,7 @@ import { useAuth } from "../../providers/AuthProvider";
 
 
 function sidebar() {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   return (
     // <div className="sidebar">
@@ -77,39 +77,45 @@ function sidebar() {
     //   </ul>
     // </div>
     <div id="nav-bar">
-  <input id="nav-toggle" type="checkbox"/>
-  <div id="nav-header"><a id="nav-title" href="https://codepen.io" target="_blank">ENI.S<i class="fab fa-codepen"></i>CIETY</a>
-    <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
-    <hr/>
-  </div>
-  <div id="nav-content">
-    <div class="nav-button" onClick={()=>{navigate('/home')}}><i class="fas fa-home"></i><span>Accueil</span></div>
-    <div class="nav-button" onClick={()=>{navigate('/workspace')}}><i class="fas fa-dumbbell"></i><span>Mon espace de travail</span></div>
-    {/* <div class="nav-button"><i class="fas fa-thumbtack"></i><span>Groupe</span></div> */}
-    <hr/>
-    <div class="nav-button" onClick={()=>{navigate('/Coding')}}><i class="fas fa-code"></i><span>Coder</span></div>
-    {/* <div class="nav-button"><i class="fas fa-chart-line"></i><span>Trending</span></div>
+      <input id="nav-toggle" type="checkbox" />
+      <div id="nav-header"><a id="nav-title" href="https://codepen.io" target="_blank">ENI.S<i class="fab fa-codepen"></i>CIETY</a>
+        <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+        <hr />
+      </div>
+      <div id="nav-content">
+        <div class="nav-button" onClick={() => { navigate('/home') }}><i class="fas fa-home"></i><span>Accueil</span></div>
+        <div class="nav-button" onClick={() => { navigate('/workspace') }}><i class="fas fa-dumbbell"></i><span>Mon espace de travail</span></div>
+        {/* <div class="nav-button"><i class="fas fa-thumbtack"></i><span>Groupe</span></div> */}
+        <hr />
+        <div class="nav-button" onClick={() => {
+          localStorage.removeItem('code')
+          localStorage.removeItem('id_project')
+          localStorage.removeItem('language')
+          localStorage.removeItem('nom_project')
+          navigate('/Coding')
+        }}><i class="fas fa-code"></i><span>Coder</span></div>
+        {/* <div class="nav-button"><i class="fas fa-chart-line"></i><span>Trending</span></div>
     <div class="nav-button"><i class="fas fa-fire"></i><span>Challenges</span></div>
     <div class="nav-button"><i class="fas fa-magic"></i><span>Spark</span></div> */}
-    <hr/>
-    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/home')}}></i><span>Cercle d'etude</span></div>
-    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/workspace')}}></i><span>C3LF</span></div>
-    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/coding')}}></i><span>Cybersecurity</span></div>
-    <div class="nav-button"><i class="fas fa-info" onClick={()=>{navigate('/home')}}></i><span>...</span></div>
-    <div id="nav-content-highlight"></div>
-  </div>
-  <input id="nav-footer-toggle" type="checkbox"/>
-  <div id="nav-footer">
-    <div id="nav-footer-heading">
-      <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547"/></div>
-      <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank">{user.username}</a><span id="nav-footer-subtitle">arenanofidina@gmail.com</span></div>
-      <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
-    </div>
-    {/* <div id="nav-footer-content">
+        <hr />
+        <div class="nav-button"><i class="fas fa-info" onClick={() => { navigate('/home') }}></i><span>Cercle d'etude</span></div>
+        <div class="nav-button"><i class="fas fa-info" onClick={() => { navigate('/workspace') }}></i><span>C3LF</span></div>
+        <div class="nav-button"><i class="fas fa-info" onClick={() => { navigate('/coding') }}></i><span>Cybersecurity</span></div>
+        <div class="nav-button"><i class="fas fa-info" onClick={() => { navigate('/home') }}></i><span>...</span></div>
+        <div id="nav-content-highlight"></div>
+      </div>
+      <input id="nav-footer-toggle" type="checkbox" />
+      <div id="nav-footer">
+        <div id="nav-footer-heading">
+          <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547" /></div>
+          <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank">{user.username}</a><span id="nav-footer-subtitle">arenanofidina@gmail.com</span></div>
+          <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
+        </div>
+        {/* <div id="nav-footer-content">
       <Lorem>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Lorem>
     </div> */}
-  </div>
-</div>
+      </div>
+    </div>
 
   )
 }

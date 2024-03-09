@@ -30,7 +30,7 @@ function Workspace() {
     return (
       <div className="dossierwrapper">
         {projets.map((projet) =>
-          <OneDoc id={projet.id} title={projet.nom_project} categorie={projet.categorie} code={projet.code} />
+          <OneDoc nom={projet.nom_project} id={projet.id} title={projet.nom_project} categorie={projet.categorie} code={projet.code} />
         )}
       </div>
     )
