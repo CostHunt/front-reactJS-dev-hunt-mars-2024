@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LoadingButton } from '@mui/lab';
+import { ErrorMessage } from '@hookform/error-message';
 
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../providers/AuthProvider';
@@ -33,11 +35,18 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+
+
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  console.log(errors.username)
 
   const user = useAuth()
 
   const submit = (data) => {
+    setLoading(true)
     login(data.username, data.password).then((resp) => {
       if (data.remember) {
         localStorage.setItem('token', resp.token)
@@ -50,8 +59,12 @@ export default function SignInSide() {
       }
       user.setToken(resp.token)
       user.setUser(resp.account)
+      setLoading(false)
+      setError(false)
     }).catch((error) => {
       console.log(error)
+      setError(true)
+      setLoading(false)
     })
   };
 
@@ -97,14 +110,16 @@ export default function SignInSide() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Username"
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  error={(errors?.username)}
+                  helperText={(errors?.username) ? errors.username.message : ""}
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('username')}
+                  {...register('username', { required: "Champs requis" })}
                 />
 
                 <TextField
@@ -116,10 +131,12 @@ export default function SignInSide() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  error={(errors?.password)}
+                  helperText={(errors?.password) ? errors.password.message : ""}
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '6%' },
                   }}
-                  {...register('password')}
+                  {...register('password', { required: "Champs requis" })}
                 />
 
                 <FormControlLabel
@@ -127,7 +144,7 @@ export default function SignInSide() {
                   label="Remember me"
                 />
 
-                <Button
+                <LoadingButton
                   type="submit"
                   fullWidth
                   variant="contained"
@@ -135,9 +152,10 @@ export default function SignInSide() {
                   InputProps={{
                     style: { width: '90%', marginBottom: '6%' },
                   }}
+                  loading={loading}
                 >
                   Sign In
-                </Button>
+                </LoadingButton>
                 <Grid container>
                   <Grid item xs>
                     <Link href="#" variant="body2">
