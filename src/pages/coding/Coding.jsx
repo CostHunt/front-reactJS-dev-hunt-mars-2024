@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Editor } from '@monaco-editor/react'
-import { Modal, Select, MenuItem, Switch, TextField, Button, Box } from '@mui/material'
+import { Modal, Select, MenuItem, Switch, TextField, Button, Box, IconButton } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { _http } from '../../utils/http';
 import { LoadingButton } from '@mui/lab';
@@ -13,6 +13,7 @@ import { createDocs, updateDocs } from '../../utils/workspace';
 import { useAuth } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { useAnimation } from 'framer-motion';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 const style = {
@@ -258,6 +259,11 @@ export default function Coding() {
                         className="editorWrapper"
                         style={{ backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center', flexWrap: 'wrap' }}>
                         <div className="editor" style={{ borderRadius: '10px' }}>
+                            <IconButton>
+                                <a href="#p">
+                                    <ExpandMoreIcon sx={{ color: 'white' }} />
+                                </a>
+                            </IconButton>
                             <Editor
                                 height="80vh"
                                 language={language}
@@ -266,7 +272,7 @@ export default function Coding() {
                                 theme={'vs-dark'}
                             />
                         </div>
-                        <div className='puts' style={{ color: 'white', margin: "2%", padding: "1%" }}>
+                        <div id='p' className='puts' style={{ color: 'white', margin: "2%", padding: "1%" }}>
                             <div className='input' style={{ marginTop: 10 }}>
                                 Input Values
                                 <TextField

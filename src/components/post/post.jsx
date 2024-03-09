@@ -250,7 +250,7 @@ function post({ post }) {
                                     {(comments.length > 0) ?
                                         comments.map((comment) => <div key={comment.id} className="oneComment">
                                             <div className="oneComment_content">
-                                                <img src="public/assets/pdp/bobo.jpg" alt="" className="postProfileImg commentProfilepic" />
+                                                <img src="/assets/pdp/no-picture.webp" alt="" className="postProfileImg commentProfilepic" />
                                                 <div className="eachContentComment">
                                                     <span className="comment_username" >{comment.account?.username}</span>
                                                     <span className="comment_content" >
@@ -260,18 +260,18 @@ function post({ post }) {
                                                 </div>
                                             </div>
                                             {/* <div className="oneComment_advice"> */}
-                                                {/* {!ResponseLikeClicked ? ( */}
-                                                    {/* <> */}
-                                                        {/* boutton pas cliqué */}
-                                                        {/* <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" /> */}
-                                                        {/* <span color="warning">42</span> */}
-                                                    {/* </> */}
-                                                {/* ) : (<> */}
-                                                    {/* boutton cliqué */}
-                                                    {/* <ThumbUpIcon color="anger" onClick={clickAdvice} /> */}
-                                                    {/* <span color="warning">43</span> */}
-                                                {/* </> */}
-                                                {/* )} */}
+                                            {/* {!ResponseLikeClicked ? ( */}
+                                            {/* <> */}
+                                            {/* boutton pas cliqué */}
+                                            {/* <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" /> */}
+                                            {/* <span color="warning">42</span> */}
+                                            {/* </> */}
+                                            {/* ) : (<> */}
+                                            {/* boutton cliqué */}
+                                            {/* <ThumbUpIcon color="anger" onClick={clickAdvice} /> */}
+                                            {/* <span color="warning">43</span> */}
+                                            {/* </> */}
+                                            {/* )} */}
 
                                             {/* </div> */}
                                         </div>) : <div className="commentsWrapper" style={{ textAlign: 'center' }}> Aucun Commentaires </div>}
