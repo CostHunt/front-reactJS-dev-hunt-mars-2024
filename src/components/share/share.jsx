@@ -15,7 +15,7 @@ function share({ setPosts }) {
 
     const { register, handleSubmit } = useForm();
 
-    const [stateafficherInputCodeS,setStateafficherInputCode] = useState(false);
+    const [stateafficherInputCodeS, setStateafficherInputCode] = useState(false);
 
     const afficherInputCode = () => {
         setStateafficherInputCode(!stateafficherInputCodeS)
@@ -26,7 +26,7 @@ function share({ setPosts }) {
     const submit = (data) => {
         if (data.description != '') {
             console.log(data)
-            createNewPost(token, data.description, "f78529c9-084f-4cf3-9117-251afa9e2dd9", "57f2b478-3441-4ebc-a34b-94a3e6f35102").then((resp) => {
+            createNewPost(token, data.description, data.code, "f78529c9-084f-4cf3-9117-251afa9e2dd9", user.id).then((resp) => {
                 setPosts((p) => [resp.data, ...p])
             })
         }
@@ -40,16 +40,16 @@ function share({ setPosts }) {
                     <input type="text"
                         placeholder="Quoi de neuf, Cost Hunt?"
                         className="shareInput"
-                        {...register('description')}
+                        {...register('description', { required: "required" })}
                     />
                 </div>
                 <hr className="shareHr" />
-                <input className="inputForCodes" placeholder="Coler votre code ici" type="textfield" style={{ display: stateafficherInputCodeS ? 'block' : 'none' }}/>
+                <textarea className="inputForCodes" placeholder="Coler votre code ici" type="textfield" style={{ display: stateafficherInputCodeS ? 'block' : 'none' }} {...register('code')} />
                 <div className="shareBottom">
                     <div className="shareOptions">
                         <div className="shareOption">
-                            <CodeIcon htmlColor="tomato" className="shareIcon" onClick={afficherInputCode}/>
-                            <span className="shareOptionText"  onClick={afficherInputCode}> Demander de l'aide dans des codes</span>
+                            <CodeIcon htmlColor="tomato" className="shareIcon" onClick={afficherInputCode} />
+                            <span className="shareOptionText" onClick={afficherInputCode}> Demander de l'aide dans des codes</span>
                         </div>
                     </div>
                     <Button className="shareButton" onClick={handleSubmit(submit)} variant="outlined" color="success">Publier</Button>

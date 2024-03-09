@@ -9,12 +9,12 @@ export async function getAllPosts(token){
     return resp
 }
 
-export async function createNewPost(token, descr, idGroupe, idAccount){
+export async function createNewPost(token, descr, code, idGroupe, idAccount){
     const body = {
         description : descr,
         id_groupe : idGroupe,
         id_account : idAccount,
-        code: null,
+        code: code,
     }
 
     console.log(body)

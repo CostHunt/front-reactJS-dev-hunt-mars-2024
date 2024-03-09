@@ -14,6 +14,7 @@ import { useAuth } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { useAnimation } from 'framer-motion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 
 const style = {
@@ -310,6 +311,11 @@ export default function Coding() {
                                 </div>
                             </div>
                         </div>
+                        <IconButton>
+                            <a href="#e">
+                                <ExpandLessIcon sx={{ color: 'white' }} />
+                            </a>
+                        </IconButton>
                     </motion.div>
                 </ div>
                 <Modal
