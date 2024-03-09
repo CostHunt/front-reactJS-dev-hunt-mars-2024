@@ -84,6 +84,14 @@ p{
     font-optical-sizing: auto;
 }
 
+.ENI, .Academie, .Social{
+    display: flex;
+    text-align: center;
+}
+
+.presentation{
+    width: 35%;
+}
 
 
 @media only screen and (max-width: 992px) {
@@ -118,4 +126,19 @@ p{
      font-size: 10px;
    }
 
+   .ENI, .Social{
+    display: flex;
+    flex-direction: column;
+    }
+    .Academie{
+        display: flex;
+        flex-direction: column-reverse;
+    } 
+    .ENI, .Academie, .Social{
+        align-items: center;
+        /* background-color: #000000; */
+    }  
+    .presentation{
+        width: 80%;
+    }
 }

@@ -124,13 +124,13 @@ function ENI() {
 
             <div className="Body" >
 
-                <motion.div className="ENI" style={{ display: 'flex', alignItems: 'center' }}>
+                <motion.div className="ENI" style={{}}>
                     <motion.img
                         initial={{ opacity: 0, x: -350 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1 }}
                         style={{ marginLeft: '10%' }} className="Sary" src={'https://scontent.ftmm2-1.fna.fbcdn.net/v/t39.30808-6/423864668_3834207256810843_6747611937071594934_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFhbVIaZaIr5XmjABYlxXmGBeDpc8DfIDwF4OlzwN8gPC47A083-Hs0XrXBOlNKX0TiYZHJ9ID0is9b77YnrzJJ&_nc_ohc=F6ZVfZnEeEAAX-M-k1E&_nc_ht=scontent.ftmm2-1.fna&oh=00_AfBQtHExQuPN99h29UwYJKL_riVpjeyQQ5o0zwCNC1-T4A&oe=65ECB74E'} />
-                    <motion.div style={{ marginLeft: '5%', width: '34%' }}>
+                    <motion.div className="presentation" style={{ marginLeft: '5%' }}>
                         <motion.h1
                             initial={{ opacity: 0, x: 250 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -142,14 +142,14 @@ function ENI() {
                             transition={{ duration: 2 }}
                             className="Descri" style={{ fontSize: '120%' }}>Située au cœur de Fianarantsoa, notre université est dédiée à l'excellence dans l'enseignement
                             de l'informatique et à la formation de professionnels compétents et innovants.
-                            L’Ecole Nationale d’Informatique, en abrégé ENI, est un établissement d’enseignement supérieur rattaché 
+                            L’Ecole Nationale d’Informatique, en abrégé ENI, est un établissement d’enseignement supérieur rattaché
                             académiquement et administrativement à l’Université de Fianarantsoa.</motion.p>
                     </motion.div>
                 </motion.div>
 
 
-                <div className="Academie" style={{ display: 'flex', alignItems: 'center', marginBottom: '1%' }}>
-                    <div style={{ marginLeft: '13%', width: '35%' }}>
+                <div className="Academie" style={{ marginBottom: '1%' }}>
+                    <div className="presentation" style={{ marginLeft: '13%' }}>
                         <motion.h1
                             initial={{ opacity: 0, x: -250 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -176,14 +176,14 @@ function ENI() {
                 </div>
 
 
-                <div className="Social" style={{ display: 'flex', alignItems: 'center' }}>
+                <div className="Social" style={{}}>
                     <motion.img
                         initial={{ opacity: 0, x: -350 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1 }}
                         style={{ marginLeft: '10%' }} className="Sary" src={'https://scontent.ftmm2-1.fna.fbcdn.net/v/t39.30808-6/428329962_3848679338696968_1476074998042350804_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHxDQeDkNeAxmMJSZNsl6h1YntGj2ZvmxRie0aPZm-bFNSOqwZmTv-xunYzuCG3-HrbML9hKOP8LScw3wy3Sb7d&_nc_ohc=_Pcja7P2AaUAX9Z49fJ&_nc_ht=scontent.ftmm2-1.fna&oh=00_AfBkd4xZuegqtLqXGCS5LerRJiMnEAmeBeHYIc5JqMqD5A&oe=65EDD24E'} />
 
-                    <div style={{ marginLeft: '5%', width: '34%' }}>
+                    <div className="presentation" style={{ marginLeft: '5%' }}>
                         <motion.h1
                             initial={{ opacity: 0, x: 250 }}
                             animate={{ opacity: 1, x: 0 }}
