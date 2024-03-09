@@ -21,7 +21,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path='/groupe' element={<Groupe />} />
           <Route path='/workspace' element={<Workspace />} />
-          <Route path='/cercle' element={<Cercle />} />
+          <Route path='/Faq' element={<Cercle />} />
           <Route path='/Coding' element={<Coding />} />
         </Route>
 
