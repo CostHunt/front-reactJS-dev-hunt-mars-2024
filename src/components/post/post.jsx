@@ -75,6 +75,9 @@ function post({ post }) {
     const [resolved, setResolved] = useState(false)
 
     const [open, setOpen] = useState(false);
+
+    const [likeCount, setLikeCount] = useState(post.likesCount)
+
     const handleClose = () => setOpen(false);
 
     const getDate = () => {
@@ -103,6 +106,9 @@ function post({ post }) {
     const clickLike = () => {
         likePost(token, user.id, post.id).then((resp) => {
             console.log(resp)
+        })
+        setLikeCount((c) => {
+            return (likeClicked) ? c - 1 : c + 1
         })
         setLikeClicked(!likeClicked);
     }
@@ -160,7 +166,7 @@ function post({ post }) {
                 <ThemeProvider theme={theme}>
                     <div className="postBottom">
                         <span className="postLikeCounteur">
-                            {(likeClicked) ? post.likesCount + 1 : post.likesCount} likes
+                            {likeCount} Likes
                         </span>
                         <div className="postCommentText"><ChatFilledcon sx={{ width: "18px", bottom: "0" }} />{post.commentsCount}</div>
                     </div>

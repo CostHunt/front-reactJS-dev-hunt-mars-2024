@@ -16,6 +16,7 @@ import { LoadingButton } from '@mui/lab';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../providers/AuthProvider';
 import { login } from '../../utils/login';
+import Alert from '@mui/material/Alert';
 
 function Copyright(props) {
   return (
@@ -73,10 +74,10 @@ export default function SignInSide() {
         <Grid
           item
           xs={false}
-          sm={3}
+          sm={false}
           md={4}
           sx={{
-            backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/000/176/742/original/abstract-background-with-geometric-shapes-and-lines-vector.jpg)',
+            backgroundImage: 'url("/assets/other/eni-society-login.gif")',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -85,7 +86,7 @@ export default function SignInSide() {
           }}
         />
 
-        <Grid item xs={false} sm={3} md={4} component={Paper} elevation={6} square>
+        <Grid item xs={false} sm={false} md={4} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 5,
@@ -141,6 +142,11 @@ export default function SignInSide() {
                   control={<Checkbox value="remember" color="primary" {...register('remember')} />}
                   label="Remember me"
                 />
+                {(error) ?
+                  <Alert severity="error">
+                    Vos informations sont invalides
+                  </Alert> : null
+                }
 
                 <LoadingButton
                   type="submit"

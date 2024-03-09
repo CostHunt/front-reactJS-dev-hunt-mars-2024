@@ -209,7 +209,7 @@ export default function Coding() {
                             </Select>
                         </motion.div>
 
-                        <div style={{ display: "flex", justifyContent: "center" }}>
+                        <div className='icons' style={{ justifyContent: "center" }}>
                             <WaveIcon
                                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg"
                                 alt="Bash Icon"
@@ -255,8 +255,9 @@ export default function Coding() {
                             stiffness: 260,
                             damping: 20
                         }}
-                        style={{ display: 'flex', backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center' }}>
-                        <div style={{ width: '60%', borderRadius: '10px' }}>
+                        className="editorWrapper"
+                        style={{ backgroundColor: "#1E1E1E", justifyContent: 'space-between', alignContent: 'center', flexWrap: 'wrap' }}>
+                        <div className="editor" style={{ borderRadius: '10px' }}>
                             <Editor
                                 height="80vh"
                                 language={language}
@@ -265,8 +266,8 @@ export default function Coding() {
                                 theme={'vs-dark'}
                             />
                         </div>
-                        <div style={{ color: 'white', width: '40%', margin: "2%", padding: "1%" }}>
-                            <div style={{ width: '100%', marginTop: 10 }}>
+                        <div className='puts' style={{ color: 'white', margin: "2%", padding: "1%" }}>
+                            <div className='input' style={{ marginTop: 10 }}>
                                 Input Values
                                 <TextField
                                     id="outlined-basic"
@@ -288,7 +289,7 @@ export default function Coding() {
                                     onChange={(e) => setInput(e.target.value)}
                                 />
                             </div>
-                            <div style={{ marginTop: '5%', }}>
+                            <div className='output' style={{ marginTop: '5%', }}>
                                 Output
                                 <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', width: '100%', border: '1px solid white', height: '30vh', borderRadius: '3px' }}>
                                     {output.split('\n').map((line, index) => (
@@ -298,11 +299,13 @@ export default function Coding() {
                                         </React.Fragment>
                                     ))}
                                 </div>
+                                <div style={{ marginTop: '10px' }} >
+                                    {execTime / 1000} s
+                                </div>
                             </div>
-                            {execTime / 1000} s
                         </div>
                     </motion.div>
-                </div>
+                </ div>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -310,11 +313,11 @@ export default function Coding() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <TextField label="Nom du projet" fullWidth {...register("nom_project")} defaultValue={localStorage.nom_project} />
+                        <TextField label="Nom du projet" fullWidth {...register("nom_project", { required: true })} defaultValue={localStorage.nom_project} />
                         <LoadingButton color='success' variant='contained' onClick={handleSubmit(handleSave)} endIcon={<SaveIcon />}> Save </LoadingButton>
                     </Box>
                 </Modal>
-            </div>
+            </ div>
         } />
 
     )
