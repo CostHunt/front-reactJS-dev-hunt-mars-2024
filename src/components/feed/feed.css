@@ -1,6 +1,6 @@
 .feed{
     /* flex: 5.5; */
-    height: 600px;
+    height: 100%;
     overflow-y: scroll;
 }
 
