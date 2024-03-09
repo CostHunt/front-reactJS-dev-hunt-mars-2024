@@ -13,8 +13,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LoadingButton } from '@mui/lab';
-import { ErrorMessage } from '@hookform/error-message';
-
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../providers/AuthProvider';
 import { login } from '../../utils/login';
