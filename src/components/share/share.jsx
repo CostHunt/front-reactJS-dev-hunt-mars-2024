@@ -8,10 +8,18 @@ import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { createNewPost } from "../../utils/post";
 import { useAuth } from "../../providers/AuthProvider";
+import CodeIcon from '@mui/icons-material/Code';
+import { useState } from "react";
 
 function share({ setPosts }) {
 
     const { register, handleSubmit } = useForm();
+
+    const [stateafficherInputCodeS,setStateafficherInputCode] = useState(false);
+
+    const afficherInputCode = () => {
+        setStateafficherInputCode(!stateafficherInputCodeS)
+    }
 
     const { token, user } = useAuth()
 
@@ -36,23 +44,12 @@ function share({ setPosts }) {
                     />
                 </div>
                 <hr className="shareHr" />
+                <input className="inputForCodes" placeholder="Coler votre code ici" type="textfield" style={{ display: stateafficherInputCodeS ? 'block' : 'none' }}/>
                 <div className="shareBottom">
                     <div className="shareOptions">
                         <div className="shareOption">
-                            <InsertPhotoIcon htmlColor="tomato" className="shareIcon" />
-                            <span className="shareOptionText">Photo or video</span>
-                        </div>
-                        <div className="shareOption">
-                            <Label htmlColor="blue" className="shareIcon" />
-                            <span className="shareOptionText">Photo or video</span>
-                        </div>
-                        <div className="shareOption">
-                            <LocationOnIcon htmlColor="green" className="shareIcon" />
-                            <span className="shareOptionText">Photo or video</span>
-                        </div>
-                        <div className="shareOption">
-                            <EmojiEmotionsIcon htmlColor="goldenrod" className="shareIcon" />
-                            <span className="shareOptionText">Photo or video</span>
+                            <CodeIcon htmlColor="tomato" className="shareIcon" onClick={afficherInputCode}/>
+                            <span className="shareOptionText"  onClick={afficherInputCode}> Demander de l'aide dans des codes</span>
                         </div>
                     </div>
                     <Button className="shareButton" onClick={handleSubmit(submit)} variant="outlined" color="success">Publier</Button>
