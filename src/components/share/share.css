@@ -12,6 +12,7 @@
 
 .shareWrapper{
     padding: 10px;
+    overflow-y: visible;
 }
 
 .shareTop{
@@ -47,6 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 .shareOptions{
     display: flex;

@@ -1,13 +1,14 @@
 import React from 'react'
 import SignInSide from './pages/login/Login'
-import SignUp from './pages/signup/SignUp'
-import Home from './pages/home/Home'
+import SignUp from './pages/signup/SignUp';
+import Home from "./pages/home/Home";
 import { PrivateRoute, PrivateRouteReverse } from './PrivateRoute.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Coding from './pages/coding/Coding.jsx'
 import Groupe from './components/groupe/groupe.jsx'
 import ENI from './pages/Presentation/ENI.jsx'
 import Workspace from './components/workspace/workspace.jsx'
+import Cercle from './components/cercle/cercle.jsx'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path='/groupe' element={<Groupe />} />
           <Route path='/workspace' element={<Workspace />} />
+          <Route path='/cercle' element={<Cercle />} />
           <Route path='/Coding' element={<Coding />} />
         </Route>
 
