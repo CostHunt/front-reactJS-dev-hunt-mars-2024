@@ -253,21 +253,21 @@ function post({ post }) {
 
                                                 </div>
                                             </div>
-                                            <div className="oneComment_advice">
-                                                {!ResponseLikeClicked ? (
-                                                    <>
+                                            {/* <div className="oneComment_advice"> */}
+                                                {/* {!ResponseLikeClicked ? ( */}
+                                                    {/* <> */}
                                                         {/* boutton pas cliqué */}
-                                                        <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" />
-                                                        <span color="warning">42</span>
-                                                    </>
-                                                ) : (<>
+                                                        {/* <ThumbUpAltOutlinedIcon onClick={clickAdvice} color="warning" /> */}
+                                                        {/* <span color="warning">42</span> */}
+                                                    {/* </> */}
+                                                {/* ) : (<> */}
                                                     {/* boutton cliqué */}
-                                                    <ThumbUpIcon color="anger" onClick={clickAdvice} />
-                                                    <span color="warning">43</span>
-                                                </>
-                                                )}
+                                                    {/* <ThumbUpIcon color="anger" onClick={clickAdvice} /> */}
+                                                    {/* <span color="warning">43</span> */}
+                                                {/* </> */}
+                                                {/* )} */}
 
-                                            </div>
+                                            {/* </div> */}
                                         </div>) : <div className="commentsWrapper" style={{ textAlign: 'center' }}> Aucun Commentaires </div>}
                                 </div>
                             </div>
