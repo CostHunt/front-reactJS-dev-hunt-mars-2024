@@ -104,8 +104,8 @@ function sidebar() {
       <input id="nav-footer-toggle" type="checkbox" />
       <div id="nav-footer">
         <div id="nav-footer-heading">
-          <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547" /></div>
-          <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank">{user.username}</a><span id="nav-footer-subtitle">arenanofidina@gmail.com</span></div>
+          <div id="nav-footer-avatar"><img src="/assets/pdp/costhuntLogo.png" /></div>
+          <div id="nav-footer-titlebox"><div id="nav-footer-title" target="_blank">{user.username}</div><span id="nav-footer-subtitle">{user.email}</span></div>
           <label for="nav-footer-toggle"><i className="fas fa-caret-up"></i></label>
         </div>
         {/* <div id="nav-footer-content">
