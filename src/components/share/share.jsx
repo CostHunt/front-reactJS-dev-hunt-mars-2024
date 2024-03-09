@@ -44,7 +44,7 @@ function share({ setPosts }) {
                     />
                 </div>
                 <hr className="shareHr" />
-                <input className="inputForCodes" placeholder="coler votre code ici" type="textfield" style={{ display: stateafficherInputCodeS ? 'block' : 'none' }}/>
+                <input className="inputForCodes" placeholder="Coler votre code ici" type="textfield" style={{ display: stateafficherInputCodeS ? 'block' : 'none' }}/>
                 <div className="shareBottom">
                     <div className="shareOptions">
                         <div className="shareOption">
