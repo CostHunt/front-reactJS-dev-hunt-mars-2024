@@ -78,7 +78,7 @@ function sidebar() {
     // </div>
     <div id="nav-bar">
       <input id="nav-toggle" type="checkbox" />
-      <div id="nav-header"><a id="nav-title" href="https://codepen.io" target="_blank">ENI.S<i className="fab fa-codepen"></i>CIETY</a>
+      <div id="nav-header"><div id="nav-title">ENI.S<i className="fab fa-codepen"></i>CIETY</div>
         <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
         <hr />
       </div>

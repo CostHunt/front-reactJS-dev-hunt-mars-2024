@@ -16,6 +16,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from 'react-hook-form';
 import { signup } from '../../utils/signup';
 import { useAuth } from '../../providers/AuthProvider';
+import { LoadingButton } from '@mui/lab';
+import Alert from '@mui/material/Alert';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -35,9 +38,13 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const user = useAuth()
+
+  const [loading, setLoading] = useState(false)
+
+  const [error, setError] = useState(false)
 
   const submit = (data) => {
     data['image_profile'] = './sieg.png'
@@ -45,6 +52,7 @@ export default function SignUp() {
     data['prenoms'] = 'Jean'
     data['id_quartier'] = '4824de93-7ec9-4fb5-aeb4-73f2e5ec0e79'
     // console.log(data)
+    setLoading(true)
 
     signup(data).then((resp) => {
       sessionStorage.setItem('token', resp.token)
@@ -52,8 +60,12 @@ export default function SignUp() {
       localStorage.clear()
       user.setToken(resp.token)
       user.setUser(resp.account)
+      setLoading(false)
+      setError(false)
     }).catch((error) => {
       console.log(error)
+      setLoading(false)
+      setError(true)
     })
   };
 
@@ -105,7 +117,9 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('username', { required: "Recipe name is required" })}
+                  error={(errors?.username)}
+                  helperText={(errors?.username) ? errors.username.message : ""}
+                  {...register('username', { required: "This field is required" })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -120,7 +134,9 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('matricule', { required: "Recipe name is required" })}
+                  error={(errors?.matricule)}
+                  helperText={(errors?.matricule) ? errors.matricule.message : ""}
+                  {...register('matricule', { required: "This field is required" })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -129,12 +145,15 @@ export default function SignUp() {
                   fullWidth
                   id="email"
                   label="Email Address"
+                  type="email"
                   name="email"
                   autoComplete="email"
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '2%' },
                   }}
-                  {...register('email', { required: "Recipe name is required" })}
+                  error={(errors?.email)}
+                  helperText={(errors?.email) ? errors.email.message : ""}
+                  {...register('email', { required: "This field is required" })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -149,21 +168,31 @@ export default function SignUp() {
                   InputProps={{
                     style: { borderRadius: '30px', width: '100%', marginBottom: '5%' },
                   }}
-                  {...register('password', { required: "Recipe name is required" })}
+                  error={(errors?.password)}
+                  helperText={(errors?.password) ? errors.password.message : ""}
+                  {...register('password', { required: "This field is required" })}
                 />
               </Grid>
               {/* <Grid item xs={12}>
                 <input type="file" accept='image/*' {...register('image')} />
               </Grid> */}
             </Grid>
-            <Button
+
+            {(error) ?
+              <Alert severity='error'>
+                Ce compte existe déjà
+              </Alert> : null
+            }
+
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 5 }}
+              loading={loading}
             >
               Sign Up
-            </Button>
+            </LoadingButton>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">

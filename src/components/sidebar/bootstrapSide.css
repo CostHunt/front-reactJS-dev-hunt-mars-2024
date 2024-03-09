@@ -350,7 +350,7 @@
     background-color: #D62929;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 992px) {
     /* #nav-bar #nav-content .nav-button span {
       opacity: 0;
     }
@@ -416,5 +416,11 @@
       }
 
       
+}
+
+@media screen and (max-width: 500px){
+  #nav-bar{
+    display: none;
+  }
 }
   
